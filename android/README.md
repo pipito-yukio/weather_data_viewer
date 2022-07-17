@@ -600,7 +600,7 @@ public class ResponseStatus {
 #### 2-2-1. 最新データ取得クラス
 
 [com/dreamexample/android/weatherdataviewer/data/ResponseDataResult.java]
-```
+```java
 public class ResponseDataResult {
     private final ResponseData data;
     private final ResponseStatus status;
@@ -618,7 +618,7 @@ public class ResponseDataResult {
 ※ "img_src": **"data:image/png;base64"の部分は取り除きます**
 
 [com/dreamexample/android/weatherdataviewer/data/ResponseGraphResult.java]
-```
+```java
 import android.util.Log;
 import java.util.Base64;
 
