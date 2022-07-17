@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="StyleDataBase" parent="android:Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="StyleDataValue" parent="StyleDataBase">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">@dimen/value_layout_margin</item>
+        <item name="android:padding">@dimen/value_padding</item>
+        <item name="android:paddingRight">@dimen/value_padding_right</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:text">@string/init_measurement_value</item>
+        <item name="android:textSize">@dimen/value_font_size</item>
+        <item name="android:textColor">@color/orange_red</item>
+        <item name="android:background">@android:color/black</item>
+    </style>
+    <style name="StyleDataLabelBase" parent="StyleDataBase">
+        <item name="android:padding">@dimen/label_padding</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@color/yellow_dark</item>
+    </style>
+    <style name="StyleMesurementTimeTitle" parent="StyleDataLabelBase">
+        <item name="android:padding">@dimen/value_padding</item>
+        <item name="android:textSize">@dimen/label_measurement_font_size</item>
+    </style>
+    <style name="StyleMesurementTimeValue" parent="android:Widget.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginLeft">@dimen/fotter_margin_left</item>
+        <item name="android:padding">@dimen/label_padding</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
+        <item name="android:textColor">@color/orange_red</item>
+        <item name="android:textSize">@dimen/label_measurement_font_size</item>
+        <item name="android:background">@color/black</item>
+    </style>
+    <style name="StyleDataLabelName" parent="StyleDataLabelBase">
+        <item name="android:layout_margin">@dimen/value_layout_margin</item>
+        <item name="android:gravity">right|center_vertical</item>
+    </style>
+    <style name="StyleDataUnitName" parent="StyleDataLabelBase">
+        <item name="android:layout_margin">@dimen/value_layout_margin</item>
+        <item name="android:gravity">left|center_vertical</item>
+    </style>
+    <style name="StyleResponseStatus" parent="android:Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/value_layout_margin</item>
+        <item name="android:padding">@dimen/value_padding</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:background">@drawable/frame_background_white</item>
+    </style>
+
+    <style name="StytleButtonContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>>
+        <item name="android:layout_margin">@dimen/frame_margin</item>
+        <item name="android:padding">@dimen/label_padding</item>
+        <item name="android:background">@drawable/frame_background</item>
+    </style>
+    <style name="StyleButtonUpdate" parent="android:Widget.Material.Button.Colored">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/left_button_margin</item>
+        <item name="android:padding">@dimen/label_padding</item>>
+        <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:text">@string/lbl_btn_update</item>
+    </style>
+</resources>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">気象データビューワー</string>
+    <string name="lbl_mesurement_time">測定時刻</string>
+    <string name="lbl_temp_out">外気温</string>
+    <string name="lbl_temp_in">気温</string>
+    <string name="lbl_humid">湿度</string>
+    <string name="lbl_pressure">気圧</string>
+    <string name="lbl_btn_update">更新</string>
+    <string name="fotter_lbl_doci">℃</string>
+    <string name="fotter_lbl_percent">％</string>
+    <string name="fotter_lbl_pressure">hPa</string>
+    <string name="init_measurement_time">0000&#8211;00&#8211;00 00:00</string>
+    <string name="init_measurement_value">----</string>
+    <string name="init_responsestatus_value">Warning</string>
+    <string name="format_warning">[%d] %s</string>
+    <string name="msg_network_not_available">ネットワークが利用できません！</string>
+    <string name="msg_gettting_data">データ取得中&#8230;</string>
+    <string name="msg_gettting_graph">画像取得中&#8230;</string>
+    <string name="FAB_contentDescription">FAB for screen navigate</string>
+    <string name="IMG_contentDescription">Matplotlib output image</string>
+</resources>

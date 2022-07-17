@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="frame_margin">4dp</dimen>
+    <dimen name="fotter_margin_left">5dp</dimen>
+    <dimen name="label_padding">3dp</dimen>
+    <dimen name="value_padding">5dp</dimen>
+    <dimen name="value_padding_right">8dp</dimen>
+    <dimen name="value_layout_margin">5dp</dimen>
+    <dimen name="left_button_margin">10dp</dimen>
+    <dimen name="value_font_size">60sp</dimen>
+    <dimen name="label_measurement_font_size">28sp</dimen>
+</resources>

@@ -1,0 +1,26 @@
+2022-06-30 16:45:38.632 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: true
+2022-06-30 16:45:38.651 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/WeatherApplication: typedMap: java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>>
+2022-06-30 16:45:38.654 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/WeatherApplication: RequestUrls: {wifi=http://your1.local:12345/plot_weather, mobile=http://your1.dreamexample.com:12345/plot_weather}
+2022-06-30 16:45:38.654 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/WeatherApplication: RequestHeaders: {X-Request-Phone-Token=mvyx16uEZ8Upm1Vs2PJENP... secrets.token_urlsafe(32) ...jGvXRbDB6QHu0V9tAPxI2GJQatCdyrw, X-Request-Network-Type=wifi}
+2022-06-30 16:45:38.823 23762-23788/com.dreamexample.android.weatherdataviewer.debug I/MainActivity: Default network is now: 100
+2022-06-30 16:45:38.825 23762-23788/com.dreamexample.android.weatherdataviewer.debug I/MainActivity: Default network changed capabilities: [ Transports: CELLULAR Capabilities: SUPL&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_ROAMING&FOREGROUND&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=15000Kbps LinkDnBandwidth>=43209Kbps Specifier: <TelephonyNetworkSpecifier [mSubId = 2]> UnderlyingNetworks: Null]
+2022-06-30 16:45:38.825 23762-23762/com.dreamexample.android.weatherdataviewer.debug I/ContentCaptureHelper: Setting logging level to OFF
+2022-06-30 16:45:38.880 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/TodayDataFragment: DisplayMetrics: DisplayMetrics{density=2.75, width=1080, height=2072, scaledDensity=2.75, xdpi=442.451, ydpi=443.552}
+2022-06-30 16:45:38.982 23762-23762/com.dreamexample.android.weatherdataviewer.debug W/TextView: onProvideContentCaptureStructure(): calling assumeLayout()
+2022-06-30 16:45:42.890 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkUtil: Build.VERSION.SDK_INT: 32
+2022-06-30 16:45:42.891 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkUtil: NetworkCapabilities: [ Transports: CELLULAR Capabilities: SUPL&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_ROAMING&FOREGROUND&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=15000Kbps LinkDnBandwidth>=43209Kbps Specifier: <TelephonyNetworkSpecifier [mSubId = 2]> UnderlyingNetworks: Null]
+2022-06-30 16:45:42.891 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkUtil: isWifiConnect: false
+2022-06-30 16:45:42.891 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkUtil: isMobileConnect: true
+2022-06-30 16:45:43.135 23762-23799/com.dreamexample.android.weatherdataviewer.debug D/WeatherRepository: ResponseCode: 200
+2022-06-30 16:45:43.142 23762-23799/com.dreamexample.android.weatherdataviewer.debug D/WeatherRepository: ResponseResult: ResponseResult{data=ResponseData{measurement_time='2022-06-30 16:35', temp_out=24.0, temp_in=26.1, humid=54.1, pressure=1007.7}, status=ResponseStatus{code=0, message='OK'}}
+2022-06-30 16:45:46.778 23762-23762/com.dreamexample.android.weatherdataviewer.debug W/TodayDataFragment: mNoImageBitmap: android.graphics.Bitmap@8a1e900
+2022-06-30 16:45:46.779 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/TodayDataFragment: ImageView.width: 1064,height: 1671
+2022-06-30 16:45:50.001 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkUtil: Build.VERSION.SDK_INT: 32
+2022-06-30 16:45:50.002 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkUtil: NetworkCapabilities: [ Transports: CELLULAR Capabilities: SUPL&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_ROAMING&FOREGROUND&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=15000Kbps LinkDnBandwidth>=43209Kbps Specifier: <TelephonyNetworkSpecifier [mSubId = 2]> UnderlyingNetworks: Null]
+2022-06-30 16:45:50.002 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkUtil: isWifiConnect: false
+2022-06-30 16:45:50.002 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/NetworkUtil: isMobileConnect: true
+2022-06-30 16:45:50.006 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/TodayDataFragment: Key: X-Request-Image-Size=1064x1671
+2022-06-30 16:45:51.322 23762-23799/com.dreamexample.android.weatherdataviewer.debug D/WeatherRepository: ResponseCode: 200
+2022-06-30 16:45:51.580 23762-23799/com.dreamexample.android.weatherdataviewer.debug D/WeatherRepository: ResponseResult: ResponseGraphResult{imageBase64String.length=55414, status=ResponseStatus{code=0, message='OK'}}
+2022-06-30 16:45:51.585 23762-23762/com.dreamexample.android.weatherdataviewer.debug D/ResponseGraphResult: datas[0]data:image/png;base64
+

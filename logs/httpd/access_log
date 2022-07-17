@@ -1,0 +1,2 @@
+123.456.789.77 - - [30/Jun/2022:16:45:43 +0900] "GET /plot_weather/getlastdataforphone HTTP/1.1" 200 146 "-" "Dalvik/2.1.0 (Linux; U; Android 12; Pixel 4a Build/SQ3A.220605.009.A1)"
+123.456.789.77 - - [30/Jun/2022:16:45:51 +0900] "GET /plot_weather/gettodayimageforphone HTTP/1.1" 200 55473 "-" "Dalvik/2.1.0 (Linux; U; Android 12; Pixel 4a Build/SQ3A.220605.009.A1)"

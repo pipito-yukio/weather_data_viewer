@@ -1,0 +1,58 @@
+2022-06-30 16:45:27 INFO __init__.py(35)[<module>] SERVER_HOST: your1.local:12345
+2022-06-30 16:45:27 DEBUG __init__.py(41)[<module>] app.secret_key: b'[your secret key]'
+2022-06-30 16:45:27 DEBUG __init__.py(42)[<module>] <Config {'ENV': 'production', 'DEBUG': False, 'TESTING': False, 'PROPAGATE_EXCEPTIONS': None, 'PRESERVE_CONTEXT_ON_EXCEPTION': None, 'SECRET_KEY': b'[your secret key]', 'PERMANENT_SESSION_LIFETIME': datetime.timedelta(days=31), 'USE_X_SENDFILE': False, 'SERVER_NAME': 'your1.local:12345', 'APPLICATION_ROOT': '/plot_weather', 'SESSION_COOKIE_NAME': 'session', 'SESSION_COOKIE_DOMAIN': None, 'SESSION_COOKIE_PATH': None, 'SESSION_COOKIE_HTTPONLY': True, 'SESSION_COOKIE_SECURE': False, 'SESSION_COOKIE_SAMESITE': None, 'SESSION_REFRESH_EACH_REQUEST': True, 'MAX_CONTENT_LENGTH': None, 'SEND_FILE_MAX_AGE_DEFAULT': datetime.timedelta(seconds=43200), 'TRAP_BAD_REQUEST_ERRORS': None, 'TRAP_HTTP_EXCEPTIONS': False, 'EXPLAIN_TEMPLATE_LOADING': False, 'PREFERRED_URL_SCHEME': 'http', 'JSON_AS_ASCII': False, 'JSON_SORT_KEYS': True, 'JSONIFY_PRETTYPRINT_REGULAR': False, 'JSONIFY_MIMETYPE': 'application/json', 'TEMPLATES_AUTO_RELOAD': None, 'MAX_COOKIE_SIZE': 4093, 'INFO_TODAY_UPDATE_INTERVAL': '本日データの更新は１０分間隔', 'STR_TODAY': '本日', 'TITLE_SUFFIX': 'データ表示', 'HEADER_REQUEST_IMAGE_SIZE_KEY': 'X-Request-Image-Size', 'HEADER_REQUEST_NETWORKS': ['wifi', 'mobile'], 'HEADER_REQUEST_NETWORK_TYPE_KEY': 'X-Request-Network-Type', 'HEADER_REQUEST_PHONE_TOKEN_KEY': 'X-Request-Phone-Token', 'HEADER_REQUEST_PHONE_TOKEN_VALUE': 'mvyx16uEZ8Upm1Vs2PJENP... secrets.token_urlsafe(32) ...jGvXRbDB6QHu0V9tAPxI2GJQatCdyrw'}>
+2022-06-30 16:45:28 INFO run.py(15)[<module>] run.py in host: your1.local, port: 12345
+2022-06-30 16:45:28 INFO run.py(22)[<module>] Production start.
+2022-06-30 16:45:43 DEBUG app_main.py(135)[getLastDataForPhone] getlastdataforphone()
+2022-06-30 16:45:43 DEBUG app_main.py(137)[getLastDataForPhone] headers: Host: your1.local:12345
+Content-Type: application/json;charset=utf8
+Accept: application/json;
+X-Request-Phone-Token: mvyx16uEZ8Upm1Vs2PJENP... secrets.token_urlsafe(32) ...jGvXRbDB6QHu0V9tAPxI2GJQatCdyrw
+X-Request-Network-Type: wifi
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; Pixel 4a Build/SQ3A.220605.009.A1)
+Accept-Encoding: gzip
+X-Forwarded-For: 123.456.789.77
+X-Forwarded-Host: your1.dreamexample.com:12345
+X-Forwarded-Server: your1.dreamexample.com
+Connection: close
+
+
+2022-06-30 16:45:43 DEBUG weatherdao.py(101)[getLastData] row: (1656574545, '2022-06-30 16:35', 24.0, 26.1, 54.1, 1007.7)
+2022-06-30 16:45:43 DEBUG app_main.py(40)[close_conn] db:<sqlite3.Connection object at 0x7f2b07870570>
+2022-06-30 16:45:51 DEBUG app_main.py(169)[getTodayImageForPhone] getTodayImageForPhone()
+2022-06-30 16:45:51 DEBUG app_main.py(171)[getTodayImageForPhone] headers: Host: your1.local:12345
+Content-Type: application/json;charset=utf8
+Accept: application/json;
+X-Request-Phone-Token: mvyx16uEZ8Upm1Vs2PJENP... secrets.token_urlsafe(32) ...jGvXRbDB6QHu0V9tAPxI2GJQatCdyrw
+X-Request-Network-Type: wifi
+X-Request-Image-Size: 1064x1671
+User-Agent: Dalvik/2.1.0 (Linux; U; Android 12; Pixel 4a Build/SQ3A.220605.009.A1)
+Accept-Encoding: gzip
+X-Forwarded-For: 123.456.789.77
+X-Forwarded-Host: your1.dreamexample.com:12345
+X-Forwarded-Server: your1.dreamexample.com
+Connection: close
+
+
+2022-06-30 16:45:51 DEBUG app_main.py(184)[getTodayImageForPhone] Phone imgSize: 1064x1671
+2022-06-30 16:45:51 DEBUG app_main.py(190)[getTodayImageForPhone] imgWd: 1064 imgHt: 1671
+2022-06-30 16:45:51 DEBUG weatherdbwithpandas.py(49)[getTodayDataFrame] query_params: {'device_name': 'esp8266_1', 'today': 'now'}
+2022-06-30 16:45:51 DEBUG plotterweather.py(65)[gen_plotimage]                        measurement_time  temp_out  temp_in  humid  pressure
+measurement_time                                                           
+2022-06-30 00:02:26 2022-06-30 00:02:26      16.2     24.2   58.6    1002.4
+2022-06-30 00:12:10 2022-06-30 00:12:10      16.3     24.1   58.9    1002.5
+2022-06-30 00:21:55 2022-06-30 00:21:55      16.3     24.0   59.0    1002.6
+2022-06-30 00:31:39 2022-06-30 00:31:39      16.4     24.0   59.3    1002.6
+2022-06-30 00:41:23 2022-06-30 00:41:23      16.1     23.9   59.5    1002.6
+...                                 ...       ...      ...    ...       ...
+2022-06-30 15:56:47 2022-06-30 15:56:47      22.9     25.8   55.1    1007.7
+2022-06-30 16:06:31 2022-06-30 16:06:31      22.7     25.6   55.4    1007.8
+2022-06-30 16:16:15 2022-06-30 16:16:15      25.0     25.7   55.5    1007.8
+2022-06-30 16:26:00 2022-06-30 16:26:00      25.4     25.9   55.4    1007.7
+2022-06-30 16:35:45 2022-06-30 16:35:45      24.0     26.1   54.1    1007.7
+
+[103 rows x 5 columns]
+2022-06-30 16:45:51 DEBUG plotterweather.py(75)[gen_plotimage] px: 0.005
+2022-06-30 16:45:51 DEBUG plotterweather.py(76)[gen_plotimage] fig_width_px: 5.32, fig_height_px: 8.355
+2022-06-30 16:45:51 DEBUG plotterweather.py(149)[gen_plotimage] data.len: 55392
+2022-06-30 16:45:51 DEBUG app_main.py(40)[close_conn] db:<sqlite3.Connection object at 0x7f2b07870570>

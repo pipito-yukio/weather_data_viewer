@@ -1,0 +1,22 @@
+$TTL 86400
+@         IN   SOA  ns.dreamexample.com. postmaster.dreamexample.com. (
+                    2021011301  ;Serial
+                    3H          ;Refresh after 3 hours
+                    1H          ;Retry after 1 hours
+                    1W          ;Expire after 1 week
+                    1D          ;Negative Cache TTL of 1 day
+                    )
+;
+          IN   NS  ns.dreamexample.com.
+          IN   NS  awsome.internetproiver.excom.
+;
+          IN   A   012.345.678.901
+          IN   MX 10 mail.dreamexample.com.
+;
+localhost IN   A   127.0.0.1
+;
+ns        IN   A   012.345.678.901
+mail      IN   A  012.345.678.901
+raspi       IN   CNAME   ns.dreamexample.com.
+your1       IN   CNAME   ns.dreamexample.com.
+

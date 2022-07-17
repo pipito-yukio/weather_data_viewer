@@ -1,0 +1,10 @@
+{
+  "urls": {
+    "wifi": "http://your1.local:12345/plot_weather",
+    "mobile": "http://your1.dreamexample.com:12345/plot_weather"
+  },
+  "headers": {
+    "X-Request-Phone-Token": "mvyx16uEZ8Upm1Vs2PJENP... secrets.token_urlsafe(32) ...jGvXRbDB6QHu0V9tAPxI2GJQatCdyrw",
+    "X-Request-Network-Type": "wifi"
+  }
+}

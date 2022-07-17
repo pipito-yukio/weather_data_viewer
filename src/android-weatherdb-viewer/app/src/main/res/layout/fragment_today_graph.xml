@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/khaki">
+
+    <ImageView
+        android:id="@+id/currentTimeDataGraph"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="3dp"
+        android:padding="@dimen/label_padding"
+        android:scaleType="fitXY"
+        android:background="@drawable/frame_background"
+        android:contentDescription="@string/IMG_contentDescription"
+        />
+
+    <TextView
+        android:id="@+id/valGraphResponseStatus"
+        android:visibility="gone"
+        style="@style/StyleResponseStatus"/>
+
+    <LinearLayout
+        style="@style/StytleButtonContainer">
+        <Button
+            android:id="@+id/btnImageUpdate"
+            style="@style/StyleButtonUpdate"/>
+    </LinearLayout>
+</LinearLayout>
