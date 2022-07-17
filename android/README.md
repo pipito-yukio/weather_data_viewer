@@ -540,7 +540,8 @@ https://sites.google.com/site/gson/gson-user-guide
 
 #### 2-1-1. データ("data")取得クラス 
 
-(1) 最新データ取得のデータ("data")クラス
+(1) 最新データ取得のデータ("data")クラス  
+
 [com/dreamexample/android/weatherdataviewer/data/ResponseData.java]
 ```java
 import com.google.gson.annotations.SerializedName;
