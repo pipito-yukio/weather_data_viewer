@@ -94,7 +94,7 @@ IncludeOptional conf.d/*.conf
 https://httpd.apache.org/docs/2.4/mod/mod_proxy.html#proxypass  
 **Apache モジュール mod_proxy**
 
-ProxyPassMatchを使った場合の、ProxyPassReverseの書き方については下記
+ProxyPassMatchを使った場合の、ProxyPassReverseの書き方については下記URL参照  
 https://botproxy.net/docs/how-to/how-to-write-regex-for-apache-proxypassmatch-to-reverse-proxy-api-calls/  
 **HOW TO WRITE REGEX FOR APACHE PROXYPASSMATCH TO REVERSE PROXY API CALLS**
 
