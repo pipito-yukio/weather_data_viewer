@@ -66,12 +66,19 @@
         <item name="android:background">@drawable/frame_background</item>
     </style>
     <style name="StyleButtonUpdate" parent="android:Widget.Material.Button.Colored">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">66dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/left_button_margin</item>
         <item name="android:padding">@dimen/label_padding</item>>
-        <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:text">@string/lbl_btn_update</item>
+    </style>
+    <style name="StyleRadio">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/todays_item_height</item>
+        <item name="android:layout_marginEnd">3dp</item>>
+        <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 </resources>
