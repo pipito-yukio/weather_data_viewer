@@ -17,15 +17,15 @@
         app:layout_constraintTop_toTopOf="parent">
     </androidx.viewpager2.widget.ViewPager2>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingNav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:contentDescription="@string/FAB_contentDescription"
-        app:layout_anchor="@id/pager"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_arrow_next"
-        />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/floatingNav"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:contentDescription="@string/FAB_contentDescription"-->
+<!--        app:layout_anchor="@id/pager"-->
+<!--        app:layout_anchorGravity="bottom|end"-->
+<!--        app:srcCompat="@drawable/ic_arrow_next"-->
+<!--        />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

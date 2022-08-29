@@ -6,7 +6,8 @@
     <dimen name="value_padding">5dp</dimen>
     <dimen name="value_padding_right">8dp</dimen>
     <dimen name="value_layout_margin">5dp</dimen>
-    <dimen name="left_button_margin">10dp</dimen>
+    <dimen name="left_button_margin">5dp</dimen>
+    <dimen name="todays_item_height">32dp</dimen>
     <dimen name="value_font_size">60sp</dimen>
     <dimen name="label_measurement_font_size">28sp</dimen>
 </resources>

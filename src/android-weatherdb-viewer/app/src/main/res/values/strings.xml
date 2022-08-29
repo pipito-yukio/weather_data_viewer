@@ -16,6 +16,16 @@
     <string name="msg_network_not_available">ネットワークが利用できません！</string>
     <string name="msg_gettting_data">データ取得中&#8230;</string>
     <string name="msg_gettting_graph">画像取得中&#8230;</string>
+    <string name="lbl_today">今日</string>
+    <string name="lbl_range_days">今日から</string>
+    <string name="lbl_before_days">日前迄</string>
     <string name="FAB_contentDescription">FAB for screen navigate</string>
     <string name="IMG_contentDescription">Matplotlib output image</string>
+
+    <string-array name="beforeDays">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>7</item>
+    </string-array>
 </resources>
