@@ -81,9 +81,11 @@ public class TodayDataFragment extends Fragment {
             Map<String, String> headers = app.getRequestHeaders();
             // イメージ表示フラグメントが追加したヘッダを取り除く
             headers.remove(WeatherApplication.REQUEST_IMAGE_SIZE_KEY);
-            String requestUrlWithPath = requestUrl + repository.getRequestPath();
-            repository.makeCurrentTimeDataRequest(
-                    requestUrl, headers, app.mEexecutor, app.mdHandler, (result) -> {
+            String requestUrlWithPath = requestUrl + repository.getRequestPath(0);
+            // リクエストパラメータ無し
+            String requestParameter = "";
+            repository.makeCurrentTimeDataRequest(0, requestUrl, requestParameter, headers,
+                    app.mEexecutor, app.mdHandler, (result) -> {
                 // ボタン状態を戻す
                 btnUpdate.setEnabled(true);
                 // リクエストURLをAppBarに表示

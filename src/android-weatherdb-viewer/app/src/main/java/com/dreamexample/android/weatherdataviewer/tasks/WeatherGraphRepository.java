@@ -14,13 +14,16 @@ import java.nio.charset.StandardCharsets;
  */
 public class WeatherGraphRepository extends WeatherRepository<ResponseGraphResult> {
     // 本日気象データグラフ
-    private static final String URL_PATH = "/gettodayimageforphone";
+    private static final String URL_TODAY_PATH = "/gettodayimageforphone";
+    // n日前〜本日分の気象データグラフ: before_days=?
+    private static final String URL_BEFORE_DAYS_PATH = "/getbeforedaysimageforphone";
+    private String[] urls = {URL_TODAY_PATH, URL_BEFORE_DAYS_PATH};
 
     public WeatherGraphRepository() {}
 
     @Override
-    public String getRequestPath() {
-        return URL_PATH;
+    public String getRequestPath(int urlIdx) {
+        return urls[urlIdx];
     }
 
     @Override

@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +48,9 @@ public class TodayGraphFragment extends Fragment {
     private TextView mValResponseStatus;
     private Bitmap mNoImageBitmap;
     private DisplayMetrics mMetrics;
+    private RadioButton mRadioToday;
+    private RadioGroup mDayGroup;
+    private Spinner mCboBeforeDays;
     private int mImageWd;
     private int mImageHt;
 
@@ -64,6 +70,15 @@ public class TodayGraphFragment extends Fragment {
         mImageView = mainView.findViewById(R.id.currentTimeDataGraph);
         mValResponseStatus = mainView.findViewById(R.id.valGraphResponseStatus);
         Button btnUpdate = mainView.findViewById(R.id.btnImageUpdate);
+        mCboBeforeDays = mainView.findViewById(R.id.cboBoforeDays);
+        mCboBeforeDays.setEnabled(false);
+        mRadioToday = mainView.findViewById(R.id.radioToday);
+        mDayGroup = mainView.findViewById(R.id.dayGroup);
+        // デフォルト: "本日"
+        mDayGroup.check(R.id.radioToday);
+        mDayGroup.setOnCheckedChangeListener((group, checkedId) ->  {
+            mCboBeforeDays.setEnabled(!(checkedId == R.id.radioToday));
+        });
         initButton(btnUpdate);
         return mainView;
     }
@@ -114,9 +129,16 @@ public class TodayGraphFragment extends Fragment {
             Log.d(TAG, "Key: " + WeatherApplication.REQUEST_IMAGE_SIZE_KEY + "=" + imgSize);
             headers.put(WeatherApplication.REQUEST_IMAGE_SIZE_KEY, imgSize);
             // リクエストURLをAppBarに表示
-            String requestUrlWithPath = requestUrl + repository.getRequestPath();
-            repository.makeCurrentTimeDataRequest(
-                    requestUrl, headers, app.mEexecutor, app.mdHandler, (result) -> {
+            int selectedIndex = getSelectedRadioIndex();
+            String requestUrlWithPath = requestUrl + repository.getRequestPath(selectedIndex);
+            String requestParameter;
+            if (selectedIndex == 1) {
+                requestParameter = "?before_days=" + mCboBeforeDays.getSelectedItem();
+            } else {
+                requestParameter = "";
+            }
+            repository.makeCurrentTimeDataRequest(selectedIndex, requestUrl, requestParameter,
+                    headers, app.mEexecutor, app.mdHandler, (result) -> {
                 // ボタン状態を戻す
                 btnUpdate.setEnabled(true);
                 // リクエストURLをAppBarに表示
@@ -187,5 +209,13 @@ public class TodayGraphFragment extends Fragment {
         Exception exception = result.getException();
         mValResponseStatus.setText(exception.getLocalizedMessage());
         mValResponseStatus.setVisibility(View.VISIBLE);
+    }
+
+    private int getSelectedRadioIndex() {
+        int radioId = mDayGroup.getCheckedRadioButtonId();
+        if (mRadioToday.getId() == radioId) {
+            return 0;
+        }
+        return 1;
     }
 }

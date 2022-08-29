@@ -19,7 +19,7 @@ public class WeatherDataRepository extends WeatherRepository<ResponseDataResult>
     public WeatherDataRepository() {}
 
     @Override
-    public String getRequestPath() {
+    public String getRequestPath(int urlIdx) {
         return URL_PATH;
     }
 
