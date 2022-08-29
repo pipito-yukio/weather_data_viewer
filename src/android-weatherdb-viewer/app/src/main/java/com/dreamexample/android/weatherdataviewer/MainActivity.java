@@ -18,7 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+//import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.dreamexample.android.weatherdataviewer.ui.main.MultiScreenFragmentAdapter;
 import com.dreamexample.android.weatherdataviewer.ui.main.TodayDataFragment;
 import com.dreamexample.android.weatherdataviewer.ui.main.TodayGraphFragment;
@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     MultiScreenFragmentAdapter mFragmentAdapter;
     ViewPager2 mViewPager2;
     ViewPager2.OnPageChangeCallback mOnPageChangeCallback;
-    // FAB オブジェクト: 2つのフラグメントをコードにより切り替えるためのボタン
-    FloatingActionButton mFloatingNav;
+//    // FAB オブジェクト: 2つのフラグメントをコードにより切り替えるためのボタン
+//    FloatingActionButton mFloatingNav;
     // 次フラグメントインデックス用配列
     int[] itemIndexes = {1, 0};
     // フラグメントに対応する FABオブジェクトのアイコン (arrow next, arror back)
@@ -46,15 +46,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 画面に矢印アイコンがないと初見ユーザーが次画面が有るかどうかわからないため設けた
-        mFloatingNav = findViewById(R.id.floatingNav);
-        itemIcons[0] = mFloatingNav.getDrawable();
-        itemIcons[1] = AppCompatResources.getDrawable(this, R.drawable.ic_arrow_back);
-        // コードで次のフラグメントを選択 ※左右のフリック(スライド)操作でも画面を切り替え可能
-        mFloatingNav.setOnClickListener((view)-> {
-            int currentItem = mViewPager2.getCurrentItem();
-            Log.d(TAG, "currentItem: " + currentItem);
-            mViewPager2.setCurrentItem(itemIndexes[currentItem]);
-        });
+//        mFloatingNav = findViewById(R.id.floatingNav);
+//        itemIcons[0] = mFloatingNav.getDrawable();
+//        itemIcons[1] = AppCompatResources.getDrawable(this, R.drawable.ic_arrow_back);
+//        // コードで次のフラグメントを選択 ※左右のフリック(スライド)操作でも画面を切り替え可能
+//        mFloatingNav.setOnClickListener((view)-> {
+//            int currentItem = mViewPager2.getCurrentItem();
+//            Log.d(TAG, "currentItem: " + currentItem);
+//            mViewPager2.setCurrentItem(itemIndexes[currentItem]);
+//        });
 
         mViewPager2 = findViewById(R.id.pager);
         mFragmentAdapter = new MultiScreenFragmentAdapter(
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageSelected(position);
                 Log.d(TAG, "position: " + position);
                 // FABアイコンを表示ページ(フラグメント)に対応するアイコンを切り替える
-                mFloatingNav.setImageDrawable(itemIcons[position]);
+//                mFloatingNav.setImageDrawable(itemIcons[position]);
             }
         };
         // ページャにコールバックを登録
