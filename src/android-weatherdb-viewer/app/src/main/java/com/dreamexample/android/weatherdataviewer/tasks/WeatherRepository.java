@@ -18,14 +18,17 @@ public abstract class WeatherRepository<T> {
     public WeatherRepository() {}
 
     public void makeCurrentTimeDataRequest(
+            int urlIdx,
             String baseUrl,
+            String requestParameter,
             Map<String, String> headers,
             ExecutorService executor,
             Handler handler,
             final RepositoryCallback<T> callback) {
         executor.execute(() -> {
             try {
-                String requestUrl = baseUrl + getRequestPath();
+                String requestUrl = baseUrl + getRequestPath(urlIdx) + requestParameter;
+                Log.d(TAG, "requestUrl:" + requestUrl);
                 Result<T> result =
                         getSynchronousCurrentTimeDataRequest(requestUrl, headers);
                 notifyResult(result, callback, handler);
@@ -72,7 +75,7 @@ public abstract class WeatherRepository<T> {
         }
     }
 
-    public abstract String getRequestPath();
+    public abstract String getRequestPath(int urlIdx);
 
     public abstract T parseInputStream(InputStream is) throws IOException;
 }
