@@ -3,9 +3,17 @@
 ### 1-0. 画面イメージ
 
 * 最新データ表示画面 (左) と当日データグラフ画面 (右)
-* 左右のスワイプ操作、又は FloatingActionButtonの押下で画面を切り替えします
+* 左右のスワイプ操作で画面を切り替えします
 <div>
 <img src="images/WeahterDataViewer_OK_mobile.png" width="550"
+</div>
+<br />
+
+* 今日から(1, 2, 3, 7)日 前迄の期間グラフも表示
+* 数日前からの気圧の上がり下がりがわかるので天気が良くなるのか悪くなるのかの目安になります
+
+<div>
+<img src="images/WeatherDataViewer_beforeDays_mobile.png" width="550"
 </div>
 <br />
 
@@ -355,7 +363,14 @@ W/WeatherRepository: Cleartext HTTP traffic to xxxxxx.local not permitted
         <item name="android:padding">@dimen/label_padding</item>>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:text">@string/lbl_btn_update</item>
+    </style>
+    <!-- ラジオボタンのスタイル -->
+    <style name="StyleRadio">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/todays_item_height</item>
+        <item name="android:layout_marginEnd">3dp</item>>
+        <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 </resources>
 ```
@@ -410,7 +425,41 @@ W/WeatherRepository: Cleartext HTTP traffic to xxxxxx.local not permitted
                 style="@style/StyleDataUnitName"/>
         </TableRow>
 
-        <!-- 一部省略 -->
+        <TableRow android:gravity="center_vertical">
+            <TextView
+                android:text="@string/lbl_temp_in"
+                style="@style/StyleDataLabelName"/>
+            <TextView
+                android:id="@+id/valTempin"
+                style="@style/StyleDataValue"/>
+            <TextView
+                android:text="@string/fotter_lbl_doci"
+                style="@style/StyleDataUnitName"/>
+        </TableRow>
+
+        <TableRow android:gravity="center_vertical">
+            <TextView
+                android:text="@string/lbl_humid"
+                style="@style/StyleDataLabelName"/>
+            <TextView
+                android:id="@+id/valHumid"
+                style="@style/StyleDataValue"/>
+            <TextView
+                android:text="@string/fotter_lbl_percent"
+                style="@style/StyleDataUnitName"/>
+        </TableRow>
+
+        <TableRow android:gravity="center_vertical">
+            <TextView
+                android:text="@string/lbl_pressure"
+                style="@style/StyleDataLabelName"/>
+            <TextView
+                android:id="@+id/valPressure"
+                style="@style/StyleDataValue"/>
+            <TextView
+                android:text="@string/fotter_lbl_pressure"
+                style="@style/StyleDataUnitName"/>
+        </TableRow>
 
         <TableRow
             android:id="@+id/messageRow"
@@ -427,6 +476,7 @@ W/WeatherRepository: Cleartext HTTP traffic to xxxxxx.local not permitted
         style="@style/StytleButtonContainer">
         <Button
             android:id="@+id/btnUpdate"
+            android:text="@string/lbl_btn_update"
             style="@style/StyleButtonUpdate"/>
     </LinearLayout>
 </LinearLayout>
@@ -440,18 +490,8 @@ W/WeatherRepository: Cleartext HTTP traffic to xxxxxx.local not permitted
     * https://medium.com/@huseyinozkoc/hello-welcome-to-my-article-dear-android-developers-and-dear-fox-a4c483f8a4ac  
     **How can we use ViewPager2 basically?**  
 
-* References FloatingActionButton  
-    * https://guides.codepath.com/android/floating-action-buttons  
-      **Floating Action Buttons**  
-    * Androidアプリ開発の教科書 第2版 Java対応  
-      ISBN 978-4-7981-6980-4  
-      **16.7 FloatingActionButton (FAB)**
-
-ここではFloatingActionButtonのアンカーをViewPager2に設定します
-
 [res/layout/activity_main.xml]
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -470,19 +510,7 @@ W/WeatherRepository: Cleartext HTTP traffic to xxxxxx.local not permitted
         app:layout_constraintTop_toTopOf="parent">
     </androidx.viewpager2.widget.ViewPager2>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingNav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:contentDescription="@string/FAB_contentDescription"
-        app:layout_anchor="@id/pager"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_arrow_next"
-        />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-```
+</androidx.coordinatorlayout.widget.CoordinatorLayout>```
 
 ### 2-1. データクラスの実装
 
@@ -854,14 +882,17 @@ public abstract class WeatherRepository<T> {
     public WeatherRepository() {}
 
     public void makeCurrentTimeDataRequest(                       // (1)
+            int urlIdx,
             String baseUrl,
+            String requestParameter,
             Map<String, String> headers,
             ExecutorService executor,
             Handler handler,
             final RepositoryCallback<T> callback) {
         executor.execute(() -> {
             try {
-                String requestUrl = baseUrl + getRequestPath();
+                String requestUrl = baseUrl + getRequestPath(urlIdx) + requestParameter;
+                Log.d(TAG, "requestUrl:" + requestUrl);
                 Result<T> result =
                         getSynchronousCurrentTimeDataRequest(requestUrl, headers); // (1A)
                 notifyResult(result, callback, handler);
@@ -909,7 +940,7 @@ public abstract class WeatherRepository<T> {
         }
     }
 
-    public abstract String getRequestPath();                             // (4)
+    public abstract String getRequestPath(int urlIdx);                  // (4)
 
     public abstract T parseInputStream(InputStream is) throws IOException; // (5)
 }
@@ -941,7 +972,7 @@ public class WeatherDataRepository extends WeatherRepository<ResponseDataResult>
     public WeatherDataRepository() {}
 
     @Override
-    public String getRequestPath() {
+    public String getRequestPath(int urlIdx) {
         return URL_PATH;
     }
 
@@ -987,12 +1018,15 @@ import java.nio.charset.StandardCharsets;
 public class WeatherGraphRepository extends WeatherRepository<ResponseGraphResult> {
     // 本日気象データグラフ
     private static final String URL_PATH = "/gettodayimageforphone";
+    // n日前〜本日分の気象データグラフ: before_days=?
+    private static final String URL_BEFORE_DAYS_PATH = "/getbeforedaysimageforphone";
+    private String[] urls = {URL_TODAY_PATH, URL_BEFORE_DAYS_PATH};
 
     public WeatherGraphRepository() {}
 
     @Override
-    public String getRequestPath() {
-        return URL_PATH;
+    public String getRequestPath(int urlIdx) {
+        return urls[urlIdx];
     }
 
     @Override
@@ -1109,9 +1143,11 @@ public class TodayDataFragment extends Fragment {
             Map<String, String> headers = app.getRequestHeaders();
             // イメージ表示フラグメントが追加したヘッダを取り除く
             headers.remove(WeatherApplication.REQUEST_IMAGE_SIZE_KEY);
-            String requestUrlWithPath = requestUrl + repository.getRequestPath(); // (2-7)
-            repository.makeCurrentTimeDataRequest(                                // (2-8)
-                    requestUrl, headers, app.mEexecutor, app.mdHandler, (result) -> {
+            String requestUrlWithPath = requestUrl + repository.getRequestPath(0);; // (2-7)
+            // リクエストパラメータ無し
+            String requestParameter = "";
+            repository.makeCurrentTimeDataRequest(0, requestUrl, requestParameter, headers, // (2-8)
+                    app.mEexecutor, app.mdHandler, (result) -> {
                 // ボタン状態を戻す
                 btnUpdate.setEnabled(true);
                 // リクエストURLをAppBarに表示
@@ -1219,9 +1255,15 @@ public class TodayGraphFragment extends Fragment {
     private static final String TAG = "TodayDataFragment";
 
     private final String NO_IMAGE_FILE = "NoImage_500x700.png";
+    private final String SPINNER_DEFAULT_ITEM_IDEX = "0";
     private ImageView mImageView;
     private TextView mValResponseStatus;
     private Bitmap mNoImageBitmap;
+    private DisplayMetrics mMetrics;
+    private RadioButton mRadioToday;
+    private RadioGroup mDayGroup;
+    private ViewGroup mSpinnerFrame;
+    private Spinner mCboBeforeDays;
     private int mImageWd;
     private int mImageHt;
 
@@ -1241,6 +1283,18 @@ public class TodayGraphFragment extends Fragment {
         mImageView = mainView.findViewById(R.id.currentTimeDataGraph);
         mValResponseStatus = mainView.findViewById(R.id.valGraphResponseStatus);
         Button btnUpdate = mainView.findViewById(R.id.btnImageUpdate);
+        mSpinnerFrame = mainView.findViewById(R.id.SpinnerFrame);
+        // 前日指定のスピナーはDisabled
+        mCboBeforeDays = mainView.findViewById(R.id.cboBoforeDays);
+        mCboBeforeDays.setSelection(0);
+        mCboBeforeDays.setEnabled(false);
+        mRadioToday = mainView.findViewById(R.id.radioToday);
+        mDayGroup = mainView.findViewById(R.id.dayGroup);
+        // デフォルト: "本日"
+        mDayGroup.check(R.id.radioToday);
+        mDayGroup.setOnCheckedChangeListener(
+                (group, checkedId) -> mCboBeforeDays.setEnabled(!(checkedId == R.id.radioToday))
+        );
         initButton(btnUpdate);
         return mainView;
     }
@@ -1261,6 +1315,9 @@ public class TodayGraphFragment extends Fragment {
                     mImageHt = mImageView.getHeight();              // (1-4)
                     Log.d(TAG, "ImageView.width: " + mImageWd + ",height: " + mImageHt);
                 }
+                // Spinner set dropdownWidth
+                Log.d(TAG, "SpinnerFrame width: " + mSpinnerFrame.getWidth());
+                mCboBeforeDays.setDropDownWidth(mSpinnerFrame.getWidth());
             }catch (IOException iex) {
                 // 通常ここには来ない
                 Log.w(TAG, iex.getLocalizedMessage());
@@ -1291,9 +1348,21 @@ public class TodayGraphFragment extends Fragment {
             Log.d(TAG, "Key: " + WeatherApplication.REQUEST_IMAGE_SIZE_KEY + "=" + imgSize);
             headers.put(WeatherApplication.REQUEST_IMAGE_SIZE_KEY, imgSize); // (2-2)
             // リクエストURLをAppBarに表示
-            String requestUrlWithPath = requestUrl + repository.getRequestPath();
-            repository.makeCurrentTimeDataRequest(
-                    requestUrl, headers, app.mEexecutor, app.mdHandler, (result) -> {
+            int beforeIndex = getSelectedbeforeIndex();
+            String requestUrlWithPath = requestUrl + repository.getRequestPath(beforeIndex);
+            String requestParameter;
+            if (beforeIndex == 1) {
+                Log.d(TAG, "Spinner selectItem: " + mCboBeforeDays.getSelectedItem());
+                if (mCboBeforeDays.getSelectedItem() != null) {
+                    requestParameter = "?before_days=" + mCboBeforeDays.getSelectedItem();
+                } else {
+                    requestParameter = "?before_days=" + SPINNER_DEFAULT_ITEM_IDEX;
+                }
+            } else {
+                requestParameter = "";
+            }
+            repository.makeCurrentTimeDataRequest(beforeIndex, requestUrl, requestParameter,
+                    headers, app.mEexecutor, app.mdHandler, (result) -> {
                 // ボタン状態を戻す
                 btnUpdate.setEnabled(true);
                 // リクエストURLをAppBarに表示
@@ -1322,6 +1391,14 @@ public class TodayGraphFragment extends Fragment {
                     decoded, 0, decoded.length);             // (3-2)
             mImageView.setImageBitmap(bitmap);               // (3-3)
         }
+    }
+
+    private int getSelectedbeforeIndex() {
+        int radioId = mDayGroup.getCheckedRadioButtonId();
+        if (mRadioToday.getId() == radioId) {
+            return 0;
+        }
+        return 1;
     }
 ```
 
@@ -1363,13 +1440,8 @@ public class MultiScreenFragmentAdapter extends FragmentStateAdapter {
 ```
 (1) ViewPager2でページの切り替わりを検知するコールバック変数を宣言
    (1-1) ViewPager2.OnPageChangeCallback の生成
-   (1-2) ページが変わったら対応するFABのアイコンも切り替える
-   (1-3) ページャーにコールバックを登録 ※ 登録は onStart()で行う
-   (1-4) ページャーのコールバック登録解除 ※ 解除は onStop()で行う
-(2) FAB (Floating Action Button) の変数を宣言
-   (2-1) FAB のクリックリスナー生成
-   (2-2) ページャーから現在のベージインデックスを取得
-   (2-3) ページインデックスに対応する次のページインデックスのページに画面を切り替える 
+   (1-2) ページャーにコールバックを登録 ※ 登録は onStart()で行う
+   (1-3) ページャーのコールバック登録解除 ※ 解除は onStop()で行う
 ```
 
 ※importは省略しています
@@ -1381,12 +1453,6 @@ public class MainActivity extends AppCompatActivity {
     MultiScreenFragmentAdapter mFragmentAdapter;
     ViewPager2 mViewPager2;
     ViewPager2.OnPageChangeCallback mOnPageChangeCallback; // (1)
-    // FAB オブジェクト: 2つのフラグメントをコードにより切り替えるためのボタン
-    FloatingActionButton mFloatingNav;                     // (2)
-    // 次フラグメントインデックス用配列
-    int[] itemIndexes = {1, 0};
-    // フラグメントに対応する FABオブジェクトのアイコン (arrow next, arror back)
-    Drawable[] itemIcons = new Drawable[2];
 
     ConnectivityManager.NetworkCallback mNetCallback;
 
@@ -1394,17 +1460,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // 画面に矢印アイコンがないと初見ユーザーが次画面が有るかどうかわからないため設けた
-        mFloatingNav = findViewById(R.id.floatingNav);
-        itemIcons[0] = mFloatingNav.getDrawable();
-        itemIcons[1] = AppCompatResources.getDrawable(this, R.drawable.ic_arrow_back);
-        // コードで次のフラグメントを選択 ※左右のフリック(スライド)操作でも画面を切り替え可能
-        mFloatingNav.setOnClickListener((view)-> {               // (2-1)
-            int currentItem = mViewPager2.getCurrentItem();      // (2-2)
-            Log.d(TAG, "currentItem: " + currentItem);
-            mViewPager2.setCurrentItem(itemIndexes[currentItem]); // (2-3)
-        });
 
         mViewPager2 = findViewById(R.id.pager);
         mFragmentAdapter = new MultiScreenFragmentAdapter(
@@ -1431,18 +1486,10 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 Log.d(TAG, "position: " + position);
-                // FABアイコンを表示ページ(フラグメント)に対応するアイコンを切り替える
-                mFloatingNav.setImageDrawable(itemIcons[position]);     // (1-2)
             }
         };
         // ページャにコールバックを登録
-        mViewPager2.registerOnPageChangeCallback(mOnPageChangeCallback); // (1-3)
-
-        // Experimental implementation.
-        mNetCallback = new ConnectivityManager.NetworkCallback() {
-           //.. 実装省略 ...
-        };
-        manager.registerDefaultNetworkCallback(mNetCallback);   
+        mViewPager2.registerOnPageChangeCallback(mOnPageChangeCallback); // (1-2)
     }
 
     @Override
@@ -1452,16 +1499,8 @@ public class MainActivity extends AppCompatActivity {
 
         // ページャコールバックの登録解除
         if (mOnPageChangeCallback != null) {
-            mViewPager2.unregisterOnPageChangeCallback(mOnPageChangeCallback); // (1-4)
+            mViewPager2.unregisterOnPageChangeCallback(mOnPageChangeCallback); // (1-3)
             mOnPageChangeCallback = null;
-        }
-
-        // Experimental implementation.
-        if (mNetCallback != null) {
-            ConnectivityManager manager =
-                    (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            manager.unregisterNetworkCallback(mNetCallback);
-            mNetCallback = null;
         }
     }
 }
@@ -1481,7 +1520,7 @@ public class MainActivity extends AppCompatActivity {
     PCのブラウザで見た場合も同じ表示になる **※もともとPCのブラウザ向けに作っていた**
   * (2) スマートホンは画面サイズが小さいにもかかわらず出力されるグラフのサイズが大きいので文字はほとんど視認できない状態です
 <div>
-<img src="images/CompareRealMachine_NonelDensity.png"/>
+<img src="images/CompareRealMachine_NoneDensity.png"/>
 <div>
 <br />
 
