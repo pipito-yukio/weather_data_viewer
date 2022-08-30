@@ -29,14 +29,15 @@ public class NetworkUtil {
             // https://developer.android.com/training/basics/network-ops/reading-network-state?hl=ja
             Network currentNetwork = manager.getActiveNetwork();
             NetworkCapabilities caps = manager.getNetworkCapabilities(currentNetwork);
-            Log.d(TAG, "NetworkCapabilities: " + caps);
+//            Log.d(TAG, "NetworkCapabilities: " + caps);
             isWifiConnect = caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
             isMoblieConnect = caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
         } else {
             // 'getType()' is deprecated as of API 28: Android 9.0 (Pie)
             for (Network network : manager.getAllNetworks()) {
-                Log.d(TAG, "Network: " + network);
+//                Log.d(TAG, "Network: " + network);
                 NetworkInfo info = manager.getNetworkInfo(network);
+                Log.d(TAG, "NetworkInfo: " + info);
                 if (info.getType() == ConnectivityManager.TYPE_WIFI) {
                     isWifiConnect |= info.isConnected();
                 }
