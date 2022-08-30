@@ -104,6 +104,9 @@ public class TodayGraphFragment extends Fragment {
                     mImageHt = mImageView.getHeight();
                     Log.d(TAG, "ImageView.width: " + mImageWd + ",height: " + mImageHt);
                 }
+                // Spinner set dropdownWidth
+                Log.d(TAG, "SpinnerFrame width: " + mSpinnerFrame.getWidth());
+                mCboBeforeDays.setDropDownWidth(mSpinnerFrame.getWidth());
             }catch (IOException iex) {
                 // 通常ここには来ない
                 Log.w(TAG, iex.getLocalizedMessage());
