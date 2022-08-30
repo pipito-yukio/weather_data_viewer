@@ -95,6 +95,7 @@
         style="@style/StytleButtonContainer">
         <Button
             android:id="@+id/btnUpdate"
+            android:text="@string/lbl_btn_update"
             style="@style/StyleButtonUpdate"/>
     </LinearLayout>
 </LinearLayout>

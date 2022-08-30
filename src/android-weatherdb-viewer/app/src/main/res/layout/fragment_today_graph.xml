@@ -30,6 +30,7 @@
 
         <Button
             android:id="@+id/btnImageUpdate"
+            android:text="@string/lbl_btn_update"
             style="@style/StyleButtonUpdate"
             />
 

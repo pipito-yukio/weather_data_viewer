@@ -72,7 +72,6 @@
         <item name="android:padding">@dimen/label_padding</item>>
         <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:text">@string/lbl_btn_update</item>
     </style>
     <style name="StyleRadio">
         <item name="android:layout_width">wrap_content</item>
