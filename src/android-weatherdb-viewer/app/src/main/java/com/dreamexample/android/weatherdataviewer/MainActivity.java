@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
 //    // FAB オブジェクト: 2つのフラグメントをコードにより切り替えるためのボタン
 //    FloatingActionButton mFloatingNav;
     // 次フラグメントインデックス用配列
-    int[] itemIndexes = {1, 0};
+//    int[] itemIndexes = {1, 0};
     // フラグメントに対応する FABオブジェクトのアイコン (arrow next, arror back)
-    Drawable[] itemIcons = new Drawable[2];
+//    Drawable[] itemIcons = new Drawable[2];
 
     ConnectivityManager.NetworkCallback mNetCallback;
 
