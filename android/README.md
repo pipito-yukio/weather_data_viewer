@@ -1255,7 +1255,6 @@ public class TodayGraphFragment extends Fragment {
     private static final String TAG = "TodayDataFragment";
 
     private final String NO_IMAGE_FILE = "NoImage_500x700.png";
-    private final String SPINNER_DEFAULT_ITEM_IDEX = "0";
     private ImageView mImageView;
     private TextView mValResponseStatus;
     private Bitmap mNoImageBitmap;
@@ -1350,15 +1349,19 @@ public class TodayGraphFragment extends Fragment {
             // リクエストURLをAppBarに表示
             int beforeIndex = getSelectedbeforeIndex();
             String requestUrlWithPath = requestUrl + repository.getRequestPath(beforeIndex);
+            // 今日から n(1,2,3,7)日が選択された時のリクエストパラろメータの設定
             String requestParameter;
             if (beforeIndex == 1) {
                 Log.d(TAG, "Spinner selectItem: " + mCboBeforeDays.getSelectedItem());
                 if (mCboBeforeDays.getSelectedItem() != null) {
+                    // 選択した値
                     requestParameter = "?before_days=" + mCboBeforeDays.getSelectedItem();
                 } else {
-                    requestParameter = "?before_days=" + SPINNER_DEFAULT_ITEM_IDEX;
+                    // 未選択ならデフォルト 1日前
+                    requestParameter = "?before_days=1";
                 }
             } else {
+                // 今日のデータならリクエストパラメータ無し
                 requestParameter = "";
             }
             repository.makeCurrentTimeDataRequest(beforeIndex, requestUrl, requestParameter,
