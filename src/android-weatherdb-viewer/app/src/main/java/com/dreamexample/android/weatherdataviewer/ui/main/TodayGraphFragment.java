@@ -44,12 +44,14 @@ public class TodayGraphFragment extends Fragment {
     private static final String TAG = "TodayDataFragment";
 
     private final String NO_IMAGE_FILE = "NoImage_500x700.png";
+    private final String SPINNER_DEFAULT_ITEM_IDEX = "0";
     private ImageView mImageView;
     private TextView mValResponseStatus;
     private Bitmap mNoImageBitmap;
     private DisplayMetrics mMetrics;
     private RadioButton mRadioToday;
     private RadioGroup mDayGroup;
+    private ViewGroup mSpinnerFrame;
     private Spinner mCboBeforeDays;
     private int mImageWd;
     private int mImageHt;
@@ -70,7 +72,10 @@ public class TodayGraphFragment extends Fragment {
         mImageView = mainView.findViewById(R.id.currentTimeDataGraph);
         mValResponseStatus = mainView.findViewById(R.id.valGraphResponseStatus);
         Button btnUpdate = mainView.findViewById(R.id.btnImageUpdate);
+        mSpinnerFrame = mainView.findViewById(R.id.SpinnerFrame);
+        // 前日指定のスピナーはDisabled
         mCboBeforeDays = mainView.findViewById(R.id.cboBoforeDays);
+        mCboBeforeDays.setSelection(0);
         mCboBeforeDays.setEnabled(false);
         mRadioToday = mainView.findViewById(R.id.radioToday);
         mDayGroup = mainView.findViewById(R.id.dayGroup);
@@ -129,15 +134,20 @@ public class TodayGraphFragment extends Fragment {
             Log.d(TAG, "Key: " + WeatherApplication.REQUEST_IMAGE_SIZE_KEY + "=" + imgSize);
             headers.put(WeatherApplication.REQUEST_IMAGE_SIZE_KEY, imgSize);
             // リクエストURLをAppBarに表示
-            int selectedIndex = getSelectedRadioIndex();
-            String requestUrlWithPath = requestUrl + repository.getRequestPath(selectedIndex);
+            int beforeIndex = getSelectedbeforeIndex();
+            String requestUrlWithPath = requestUrl + repository.getRequestPath(beforeIndex);
             String requestParameter;
-            if (selectedIndex == 1) {
-                requestParameter = "?before_days=" + mCboBeforeDays.getSelectedItem();
+            if (beforeIndex == 1) {
+                Log.d(TAG, "Spinner selectItem: " + mCboBeforeDays.getSelectedItem());
+                if (mCboBeforeDays.getSelectedItem() != null) {
+                    requestParameter = "?before_days=" + mCboBeforeDays.getSelectedItem();
+                } else {
+                    requestParameter = "?before_days=" + SPINNER_DEFAULT_ITEM_IDEX;
+                }
             } else {
                 requestParameter = "";
             }
-            repository.makeCurrentTimeDataRequest(selectedIndex, requestUrl, requestParameter,
+            repository.makeCurrentTimeDataRequest(beforeIndex, requestUrl, requestParameter,
                     headers, app.mEexecutor, app.mdHandler, (result) -> {
                 // ボタン状態を戻す
                 btnUpdate.setEnabled(true);
