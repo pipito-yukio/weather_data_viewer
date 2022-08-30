@@ -81,9 +81,9 @@ public class TodayGraphFragment extends Fragment {
         mDayGroup = mainView.findViewById(R.id.dayGroup);
         // デフォルト: "本日"
         mDayGroup.check(R.id.radioToday);
-        mDayGroup.setOnCheckedChangeListener((group, checkedId) ->  {
-            mCboBeforeDays.setEnabled(!(checkedId == R.id.radioToday));
-        });
+        mDayGroup.setOnCheckedChangeListener(
+                (group, checkedId) -> mCboBeforeDays.setEnabled(!(checkedId == R.id.radioToday))
+        );
         initButton(btnUpdate);
         return mainView;
     }
