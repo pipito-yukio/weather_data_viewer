@@ -221,7 +221,7 @@ public class TodayGraphFragment extends Fragment {
         mValResponseStatus.setVisibility(View.VISIBLE);
     }
 
-    private int getSelectedRadioIndex() {
+    private int getSelectedbeforeIndex() {
         int radioId = mDayGroup.getCheckedRadioButtonId();
         if (mRadioToday.getId() == radioId) {
             return 0;
