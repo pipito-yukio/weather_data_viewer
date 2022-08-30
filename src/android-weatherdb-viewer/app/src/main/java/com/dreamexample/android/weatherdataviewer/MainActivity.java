@@ -87,36 +87,6 @@ public class MainActivity extends AppCompatActivity {
         };
         // ページャにコールバックを登録
         mViewPager2.registerOnPageChangeCallback(mOnPageChangeCallback);
-
-        // Experimental implementation.
-        ConnectivityManager manager =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        mNetCallback = new ConnectivityManager.NetworkCallback() {
-            @Override
-            public void onAvailable(@NonNull Network network) {
-                Log.i(TAG, "Default network is now: " + network);
-            }
-
-            @Override
-            public void onLost(@NonNull Network network) {
-                Log.i(TAG, "Last default network was: " + network);
-            }
-
-            @Override
-            public void onCapabilitiesChanged(
-                    @NonNull Network network,
-                    @NonNull NetworkCapabilities networkCapabilities) {
-                Log.i(TAG, "Default network changed capabilities: " + networkCapabilities);
-            }
-
-            @Override
-            public void onLinkPropertiesChanged(
-                    @NonNull Network network,
-                    @NonNull LinkProperties linkProperties) {
-                Log.i(TAG, "Default network changed link properties: " + linkProperties);
-            }
-        };
-        manager.registerDefaultNetworkCallback(mNetCallback);
     }
 
     @Override
@@ -128,14 +98,6 @@ public class MainActivity extends AppCompatActivity {
         if (mOnPageChangeCallback != null) {
             mViewPager2.unregisterOnPageChangeCallback(mOnPageChangeCallback);
             mOnPageChangeCallback = null;
-        }
-
-        // Experimental implementation.
-        if (mNetCallback != null) {
-            ConnectivityManager manager =
-                    (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            manager.unregisterNetworkCallback(mNetCallback);
-            mNetCallback = null;
         }
     }
 
