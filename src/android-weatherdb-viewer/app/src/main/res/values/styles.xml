@@ -1,83 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="StyleDataBase" parent="android:Widget.TextView">
+    <!-- AppTopFragment -->
+    <style name="BaseDataStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="StyleDataValue" parent="StyleDataBase">
+    <style name="StyleDataValue" parent="BaseDataStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_margin">@dimen/value_layout_margin</item>
-        <item name="android:padding">@dimen/value_padding</item>
-        <item name="android:paddingRight">@dimen/value_padding_right</item>
+        <item name="android:layout_margin">@dimen/data_value_margin</item>
+        <item name="android:padding">@dimen/data_value_padding</item>
+        <item name="android:paddingRight">@dimen/data_value_padding_right</item>
         <item name="android:gravity">right|center_vertical</item>
         <item name="android:text">@string/init_measurement_value</item>
-        <item name="android:textSize">@dimen/value_font_size</item>
+        <item name="android:textSize">@dimen/data_value_text_size</item>
         <item name="android:textColor">@color/orange_red</item>
         <item name="android:background">@android:color/black</item>
     </style>
-    <style name="StyleDataLabelBase" parent="StyleDataBase">
-        <item name="android:padding">@dimen/label_padding</item>
+    <style name="BaseDataLabelStyle" parent="BaseDataStyle">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@color/yellow_dark</item>
     </style>
-    <style name="StyleMesurementTimeTitle" parent="StyleDataLabelBase">
-        <item name="android:padding">@dimen/value_padding</item>
-        <item name="android:textSize">@dimen/label_measurement_font_size</item>
+    <style name="StyleMeasurementTimeTitle" parent="BaseDataLabelStyle">
+        <item name="android:padding">@dimen/data_value_padding</item>
+        <item name="android:textSize">@dimen/measurement_label_text_size</item>
     </style>
-    <style name="StyleMesurementTimeValue" parent="android:Widget.TextView">
+    <style name="StyleMeasurementTimeValue">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginLeft">@dimen/fotter_margin_left</item>
-        <item name="android:padding">@dimen/label_padding</item>
+        <item name="android:layout_marginLeft">@dimen/measurement_time_value_margin_left</item>
+        <item name="android:padding">@dimen/button_label_padding</item>
         <item name="android:gravity">center</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
         <item name="android:textColor">@color/orange_red</item>
-        <item name="android:textSize">@dimen/label_measurement_font_size</item>
+        <item name="android:textSize">@dimen/measurement_value_text_size</item>
         <item name="android:background">@color/black</item>
     </style>
-    <style name="StyleDataLabelName" parent="StyleDataLabelBase">
-        <item name="android:layout_margin">@dimen/value_layout_margin</item>
+    <!-- データ行のラベルスタイルと単位スタイル -->
+    <style name="StyleDataLabel" parent="BaseDataLabelStyle">
+        <item name="android:layout_margin">@dimen/data_value_margin</item>
+        <item name="android:padding">@dimen/data_label_padding</item>
         <item name="android:gravity">right|center_vertical</item>
     </style>
-    <style name="StyleDataUnitName" parent="StyleDataLabelBase">
-        <item name="android:layout_margin">@dimen/value_layout_margin</item>
-        <item name="android:gravity">left|center_vertical</item>
-    </style>
-    <style name="StyleResponseStatus" parent="android:Widget.TextView">
+
+    <!-- Fragment 共通 -->
+    <!-- ウォーニングビュー -->
+    <style name="StyleResponseStatus">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/value_layout_margin</item>
-        <item name="android:padding">@dimen/value_padding</item>
+        <item name="android:layout_margin">@dimen/data_value_margin</item>
+        <item name="android:padding">@dimen/data_value_padding</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
         <item name="android:textColor">@color/red</item>
         <item name="android:background">@drawable/frame_background_white</item>
     </style>
-
-    <style name="StytleButtonContainer">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!-- 下段制御ウィジットコンテナー -->
+    <style name="StyleBottomControlsContainer">
         <item name="android:orientation">horizontal</item>>
         <item name="android:layout_margin">@dimen/frame_margin</item>
-        <item name="android:padding">@dimen/label_padding</item>
+        <item name="android:padding">@dimen/bottom_controls_padding</item>
         <item name="android:background">@drawable/frame_background</item>
     </style>
-    <style name="StyleButtonUpdate" parent="android:Widget.Material.Button.Colored">
-        <item name="android:layout_width">66dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/left_button_margin</item>
-        <item name="android:padding">@dimen/label_padding</item>>
-        <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-    <style name="StyleRadio">
+    <!-- Button style -->
+    <style name="BaseButtonStyle">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/todays_item_height</item>
-        <item name="android:layout_marginEnd">3dp</item>>
-        <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/general_horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/general_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/button_label_padding</item>>
+        <item name="android:paddingBottom">@dimen/button_label_padding</item>>
+        <item name="android:paddingStart">@dimen/button_label_padding_horizontal</item>>
+        <item name="android:paddingEnd">@dimen/button_label_padding_horizontal</item>>
+        <item name="android:backgroundTint">?attr/updateButtonBgColor</item>
+        <item name="android:textColor">?attr/updateButtonTextColor</item>
+    </style>
+    <!-- Button for phone only: Small size: minHeight, minWidth==Library default
+         <dimen name="text_size_small_material">14sp</dimen>
+     -->
+    <style name="StyleButtonUpdate" parent="BaseButtonStyle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="android:minWidth">@dimen/button_min_height</item>
+        <item name="android:backgroundTint">?attr/updateButtonBgColor</item>
+    </style>
+    <!-- Button for tablet sw600dp -->
+    <style name="StyleButtonUpdateFor600dp" parent="BaseButtonStyle">
+        <item name="android:textSize">@dimen/button_label_text_size</item>
+        <item name="android:minHeight">54dip</item>
+        <item name="android:minWidth">54dip</item>
+    </style>
+    <!-- Button for tablet sw720dp -->
+    <style name="StyleButtonUpdateFor720dp" parent="BaseButtonStyle">
+        <item name="android:textSize">@dimen/button_label_text_size</item>
+        <item name="android:textColor">?attr/updateButtonTextColor</item>
+    </style>
+    <style name="BaseStyleTodayRadio">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- RadioButton (Small) textSize=14sp -->
+    <style name="StyleTodayRadio" parent="BaseStyleTodayRadio">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textColor">?attr/myAppPrimaryTextColor</item>
+    </style>
+    <!-- RadioButton (Medium) textSize=18sp -->
+    <style name="StyleTodayRadioFor10inch" parent="BaseStyleTodayRadio">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:textColor">?attr/myAppPrimaryTextColor</item>
+    </style>
+    <!-- CheckBox Style -->
+    <style name="StyleSizedCheckbox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/general_horizontal_margin</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/checkbox_text_size</item>
+        <item name="android:checked">false</item>
+    </style>
+
+    <!-- タブレットのラジオグループ -->
+    <style name="StyleRadioGroupForTablet">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/general_horizontal_margin</item>
+        <item name="android:orientation">horizontal</item>>
+    </style>
+
+    <!-- スピナースタイル: 幅は前後のウィジットに制約を設けるため "0dp"を指定 -->
+    <!-- android:drawSelectorOnTop
+     When set to true, the selector will be drawn over the selected item.
+     Otherwise the selector is drawn behind the selected item. The default
+     value is false. -->
+    <style name="StyleSpinnerInContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:dropDownWidth">match_parent</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:drawSelectorOnTop">true</item>
+    </style>
+
+    <!-- スピナーを格納するコンテナー -->
+    <!-- ConstraintLayoutで左右目一杯広げる -->
+    <style name="StyleContainerWithinSpinner">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/spinner_height</item>
+        <item name="android:layout_marginStart">@dimen/general_horizontal_margin</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">@dimen/spinner_frame_padding</item>
+        <item name="android:background">@drawable/custom_spinner_colored</item>
+    </style>
+
+    <!-- スピナースタイル -->
+    <!-- N日前 カスタム simple_spinner_item スタイル: トップのテキストなので隙間は前後のみ -->
+    <style name="StyleSpinnerItem" parent="android:style/Widget.TextView.SpinnerItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/spinner_today_padding</item>
+        <item name="android:paddingEnd">@dimen/spinner_today_padding</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:textSize">@dimen/before_day_spinner_text_size</item>
+        <item name="android:textColor">?attr/spinnerTextColor</item>
+    </style>
+    <!-- N日前 カスタム simple_spinner_dropdown_item スタイル: Popupリストなので隙間は全面 -->
+    <style name="StyleSpinnerDropdownItem" parent="android:style/Widget.DropDownItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/spinner_today_padding</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:background">?attr/spinnerPopupBgColor</item>
+        <item name="android:textSize">@dimen/before_day_spinner_text_size</item>
+        <item name="android:textColor">?attr/spinnerTextColor</item>
+    </style>
+
+    <!-- スピナーの両サイドのテキストビュースタイル -->
+    <!-- Body1: textSize=14sp, textColor=textColorPrimary
+      <attr name="textColorPrimary" format="reference|color" />
+     -->
+    <style name="BaseStyleTextViewBothSidesSpinner">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="StyleTextViewBothSideSpinner" parent="BaseStyleTextViewBothSidesSpinner">
+        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+    </style>
+    <style name="StyleTextViewBothSidesSpinner10inch" parent="BaseStyleTextViewBothSidesSpinner">
+        <item name="android:textAppearance">@android:style/TextAppearance.Material.Title</item>
+    </style>
+
+    <!-- タイトル用のTextView: textSize=12sp, textColor=textColorPrimary
+    <dimen name="text_size_title_material">20sp</dimen>
+    -->
+    <style name="BaseTextViewTitle" parent="@android:style/TextAppearance.Material.Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- PaddingのあるTextView -->
+    <style name="SpacingTitleView" parent="BaseTextViewTitle">
+        <item name="android:paddingTop">@dimen/picker_view_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/picker_view_padding_vertical</item>
+        <item name="android:paddingLeft">@dimen/picker_view_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/picker_view_padding_horizontal</item>
+    </style>
+    <!-- ピッカー系TextView(時刻表示、数値入力): 色付きフレーム付き -->
+    <style name="StyleFramedPickerView" parent="SpacingTitleView">
+        <item name="android:layout_margin">@dimen/picker_view_margin_start</item>
+        <item name="android:textSize">@dimen/picker_view_text_size</item>
+        <item name="android:textColor">?attr/inpTextFrameFgColor</item>
+        <item name="android:background">?attr/inpTextFrameBgDrawable</item>
     </style>
 </resources>

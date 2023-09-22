@@ -1,5 +1,7 @@
 package com.dreamexample.android.weatherdataviewer.data;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 public class ResponseData {
@@ -12,13 +14,17 @@ public class ResponseData {
     private final double tempIn;
     private final double humid;
     private final double pressure;
+    @SerializedName("rec_count")
+    private final int recCount;
 
-    public ResponseData(String measurementTime, double tempOut, double tempIn, double humid, double pressure) {
+    public ResponseData(String measurementTime, double tempOut, double tempIn,
+                        double humid, double pressure, int recCount) {
         this.measurementTime = measurementTime;
         this.tempOut = tempOut;
         this.tempIn = tempIn;
         this.humid = humid;
         this.pressure = pressure;
+        this.recCount = recCount;
     }
 
     public String getMeasurementTime() {
@@ -41,6 +47,9 @@ public class ResponseData {
         return pressure;
     }
 
+    public int getRecCount() { return recCount; }
+
+    @NonNull
     @Override
     public String toString() {
         return "ResponseData{" +
@@ -49,6 +58,7 @@ public class ResponseData {
                 ", temp_in=" + tempIn +
                 ", humid=" + humid +
                 ", pressure=" + pressure +
+                ", rec_count=" + recCount +
                 '}';
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="warning_map">
+        <!-- 40x 系エラーレスポンスマップ用 -->
+        <!-- アプリ側のBUG, またはサーバー側とのI/F不整合 -->
+        <!-- リクエストヘッダーエラー -->
+        <item>400,接続トークン不一致</item>
+        <item>401,端末画像サイズ未設定</item>
+        <item>402,端末画像サイズ形式エラー</item>
+        <!-- リクエストパラメータ -->
+        <item>421,センサーデバイス名未設定</item>
+        <item>422,センサーデバイス名形式エラー</item>
+        <item>423,センサーデバイス名未登録</item>
+        <!-- 期間データ画像リクエスト -->
+        <item>431,検索開始日形式エラー</item>
+        <item>433,N日前の日数未設定</item>
+        <item>434,N日前の日数エラー</item>
+        <!-- 年月データ画像リクエスト -->
+        <item>435,検索年月未設定</item>
+        <item>436,検索年月形式エラー</item>
+        <!-- 共通 -->
+        <item>559,データベースエラー</item>
+    </string-array>
+
+    <string-array name="beforeDays">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>7</item>
+    </string-array>
+</resources>

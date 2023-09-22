@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/khaki"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -12,16 +13,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/frame_margin"
         android:layout_marginBottom="0dp"
-        android:padding="4dp"
+        android:padding="@dimen/frame_padding"
         android:orientation="horizontal"
         android:background="@drawable/frame_background">
         <TextView
-            android:text="@string/lbl_mesurement_time"
-            style="@style/StyleMesurementTimeTitle"/>
+            android:text="@string/lbl_measurement_time"
+            style="@style/StyleMeasurementTimeTitle"/>
         <TextView
             android:id="@+id/valMeasurementDatetime"
             android:text="@string/init_measurement_time"
-            style="@style/StyleMesurementTimeValue"/>
+            style="@style/StyleMeasurementTimeValue"/>
     </LinearLayout>
 
     <TableLayout
@@ -29,73 +30,70 @@
         android:layout_height="0dp"
         android:layout_margin="@dimen/frame_margin"
         android:layout_marginBottom="0dp"
+        android:padding="@dimen/frame_padding"
         android:layout_weight="1"
         android:background="@drawable/frame_background">
 
         <TableRow android:gravity="center_vertical">
             <TextView
                 android:text="@string/lbl_temp_out"
-                style="@style/StyleDataLabelName"/>
+                style="@style/StyleDataLabel"/>
             <TextView
                 android:id="@+id/valTempOut"
                 style="@style/StyleDataValue" />
             <TextView
-                android:text="@string/fotter_lbl_doci"
-                style="@style/StyleDataUnitName"/>
+                android:text="@string/footer_lbl_temper_celsius"
+                style="@style/StyleDataLabel"/>
         </TableRow>
 
         <TableRow android:gravity="center_vertical">
             <TextView
                 android:text="@string/lbl_temp_in"
-                style="@style/StyleDataLabelName"/>
+                style="@style/StyleDataLabel"/>
             <TextView
                 android:id="@+id/valTempin"
                 style="@style/StyleDataValue"/>
             <TextView
-                android:text="@string/fotter_lbl_doci"
-                style="@style/StyleDataUnitName"/>
+                android:text="@string/footer_lbl_temper_celsius"
+                style="@style/StyleDataLabel"/>
         </TableRow>
 
         <TableRow android:gravity="center_vertical">
             <TextView
                 android:text="@string/lbl_humid"
-                style="@style/StyleDataLabelName"/>
+                style="@style/StyleDataLabel"/>
             <TextView
                 android:id="@+id/valHumid"
                 style="@style/StyleDataValue"/>
             <TextView
-                android:text="@string/fotter_lbl_percent"
-                style="@style/StyleDataUnitName"/>
+                android:text="@string/footer_lbl_percent"
+                style="@style/StyleDataLabel"/>
         </TableRow>
 
         <TableRow android:gravity="center_vertical">
             <TextView
                 android:text="@string/lbl_pressure"
-                style="@style/StyleDataLabelName"/>
+                style="@style/StyleDataLabel"/>
             <TextView
                 android:id="@+id/valPressure"
                 style="@style/StyleDataValue"/>
             <TextView
-                android:text="@string/fotter_lbl_pressure"
-                style="@style/StyleDataUnitName"/>
+                android:text="@string/footer_lbl_pressure"
+                style="@style/StyleDataLabel"/>
         </TableRow>
 
         <TableRow
             android:id="@+id/messageRow"
             android:visibility="gone">
-            <TextView
-                android:id="@+id/valResponseStatus"
-                android:layout_span="3"
-                android:layout_weight="1"
-                style="@style/StyleResponseStatus"/>
         </TableRow>
     </TableLayout>
 
-    <LinearLayout
-        style="@style/StytleButtonContainer">
-        <Button
-            android:id="@+id/btnUpdate"
-            android:text="@string/lbl_btn_update"
-            style="@style/StyleButtonUpdate"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tvWearningStatusView"
+        android:visibility="gone"
+        style="@style/StyleResponseStatus"
+        />
+
+    <!-- ボタングループレイアウト -->
+    <include layout="@layout/frag_top_main_bottom_container"/>
 </LinearLayout>

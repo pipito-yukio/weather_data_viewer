@@ -1,0 +1,39 @@
+<resources>
+    <!-- Theme.Light: 0.26, Theme.Dark: 0.30 -->
+    <!-- for Custom button drawable -->
+    <dimen name="disabledAlpha">0.26</dimen>
+    <!-- CheckBox scale -->
+    <dimen name="checkbox_scale">1.00</dimen>
+    <!-- Radio large scale -->
+    <dimen name="radioButtonScale">1.00</dimen>
+
+    <!-- Fragment共通 -->
+    <!-- Buttonは長方形なので幅のpaddingサイズが異なる -->
+    <dimen name="button_label_padding">6dp</dimen>
+    <dimen name="button_label_padding_horizontal">10dp</dimen>
+    <!-- 端末サイズ毎に定義 -->
+    <dimen name="general_horizontal_margin">7dp</dimen>
+    <!-- Button min sizes: Phone | Tablet sw600dp only -->
+    <dimen name="button_min_height">48dp</dimen>
+    <dimen name="button_min_width">48dp</dimen>
+    <!-- スピナー高さ -->
+    <dimen name="spinner_height">54dp</dimen>
+
+    <!-- AppTodayGraphFragment -->
+    <!-- N日前スピナーpadding -->
+    <dimen name="spinner_today_padding">10dp</dimen>
+
+    <!-- Text size -->
+    <dimen name="measurement_value_text_size">36sp</dimen>
+    <dimen name="data_value_text_size">70sp</dimen>
+    <!-- Button textSize -->
+    <dimen name="button_label_text_size">16sp</dimen>
+    <dimen name="checkbox_text_size">18sp</dimen>
+    <!-- Picker TextView TextSize -->
+    <dimen name="picker_view_text_size">18sp</dimen>
+    <!-- BeforeTodays spinner: spinnerItem, spinnerDropdownItem textSize -->
+    <dimen name="before_day_spinner_text_size">18sp</dimen>
+    <!-- Custom ActionBar Title/Subtitle textSize for Tablet -->
+    <dimen name="action_bar_title_text_size">22sp</dimen>
+    <dimen name="action_bar_subtitle_text_size">18sp</dimen>
+</resources>

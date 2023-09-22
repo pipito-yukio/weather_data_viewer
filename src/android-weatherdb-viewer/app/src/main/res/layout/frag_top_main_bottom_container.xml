@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/frame_padding"
+    style="@style/StyleBottomControlsContainer"
+    >
+    <Button
+        android:id="@+id/btnTopFragUpdate"
+        android:layout_gravity="center_vertical"
+        android:text="@string/lbl_btn_update"
+        style="@style/StyleButtonUpdate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <LinearLayout
+        android:id="@+id/SpinnerDeviceFrame"
+        android:layout_gravity="center_vertical"
+        style="@style/StyleContainerWithinSpinner"
+        app:layout_constraintStart_toEndOf="@id/btnTopFragUpdate"
+        app:layout_constraintEnd_toStartOf="@id/chkGetLatest"
+        app:layout_constraintTop_toTopOf="@id/btnTopFragUpdate"
+        app:layout_constraintBottom_toBottomOf="@id/btnTopFragUpdate"
+        >
+        <Spinner
+            android:id="@+id/spinnerSensor"
+            style="@style/StyleSpinnerInContainer"
+            />
+    </LinearLayout>
+    <CheckBox
+        android:id="@+id/chkGetLatest"
+        style="@style/StyleSizedCheckbox"
+        android:layout_gravity="center_vertical"
+        android:text="@string/chk_get_latest"
+        app:layout_constraintStart_toEndOf="@+id/SpinnerDeviceFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnTopFragUpdate"
+        app:layout_constraintBottom_toBottomOf="@id/btnTopFragUpdate"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

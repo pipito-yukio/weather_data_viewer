@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme.Light: 0.26, Theme.Dark: 0.30 -->
+    <!-- for Custom button drawable -->
+    <attr name="disabledAlpha" format="dimension"/>
+
+    <!-- ピッカー系TextView: 色付きフレーム付き -->
+    <!-- color: text color for PickerDialog of TextView -->
+    <attr name="inpTextFrameFgColor" format="color"/>
+    <!-- reference: background drawable for PickerDialog of TextView -->
+    <attr name="inpTextFrameBgDrawable" format="reference"/>
+    <!-- ウォーニングビュー用 -->
+    <attr name="warningBgDrawable" format="reference"/>
+    <attr name="warningFgColor" format="color"/>
+    <!-- Button TextColor -->
+    <attr name="updateButtonTextColor" format="color"/>
+    <attr name="updateButtonBgColor" format="color"/>
+    <!-- My Application  widget TextColor -->
+    <attr name="myAppPrimaryTextColor" format="color"/>
+    <!-- Custom SpinnerItem | SpinnerDropdownItem TextColor -->
+    <attr name="spinnerTextColor" format="color"/>
+    <!-- Spinner popup color -->
+    <attr name="spinnerPopupBgColor" format="color"/>
+    <attr name="spinnerBgColor" format="color"/>
+</resources>

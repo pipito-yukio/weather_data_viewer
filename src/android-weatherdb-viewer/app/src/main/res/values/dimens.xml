@@ -1,13 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Theme.Light: 0.26, Theme.Dark: 0.30 -->
+    <!-- for Custom button drawable -->
+    <dimen name="disabledAlpha">0.26</dimen>
+    <!-- CheckBox scale -->
+    <dimen name="checkbox_scale">0.90</dimen>
+    <!-- Radio small scale -->
+    <dimen name="radioButtonScale">0.90</dimen>
+
+    <!-- Fragment共通 -->
     <dimen name="frame_margin">4dp</dimen>
-    <dimen name="fotter_margin_left">5dp</dimen>
-    <dimen name="label_padding">3dp</dimen>
-    <dimen name="value_padding">5dp</dimen>
-    <dimen name="value_padding_right">8dp</dimen>
-    <dimen name="value_layout_margin">5dp</dimen>
-    <dimen name="left_button_margin">5dp</dimen>
-    <dimen name="todays_item_height">32dp</dimen>
-    <dimen name="value_font_size">60sp</dimen>
-    <dimen name="label_measurement_font_size">28sp</dimen>
+    <dimen name="frame_padding">4dp</dimen>
+    <dimen name="bottom_controls_padding">3dp</dimen>
+    <!-- AppTopFragment -->
+    <dimen name="measurement_time_value_margin_left">5dp</dimen>
+    <dimen name="data_value_margin">5dp</dimen>
+    <dimen name="data_value_padding">5dp</dimen>
+    <dimen name="data_value_padding_right">8dp</dimen>
+    <!-- Data行のラベル・単位 -->
+    <dimen name="data_label_padding">3dp</dimen>
+    <!-- Phoneの場合は上下同一値だが, Tabletでは幅が異なるので定義名は2つとする -->
+    <dimen name="button_label_padding">3dp</dimen>
+    <dimen name="button_label_padding_horizontal">3dp</dimen>
+    <dimen name="spinner_frame_padding">2dp</dimen>
+    <!-- 汎用のマージン: 端末サイズ毎に定義 -->
+    <dimen name="general_horizontal_margin">5dp</dimen>
+    <!-- Button min sizes: Phone | Tablet sw600dp only -->
+    <dimen name="button_min_height">48dp</dimen>
+    <dimen name="button_min_width">48dp</dimen>
+    <!-- スピナー高さ-->
+    <dimen name="spinner_height">40dp</dimen>
+    <!-- 画面下部の制御ウィジットのコンテナー -->
+    <dimen name="bottom_controls_container_padding">2dp</dimen>
+
+    <!-- AppTodayGraphFragment -->
+    <!-- Picker系TextView -->
+    <dimen name="picker_view_margin_start">5dp</dimen>
+    <dimen name="picker_view_padding_vertical">2dp</dimen>
+    <dimen name="picker_view_padding_horizontal">5dp</dimen>
+    <!-- N日前スピナー -->
+    <!-- values/dimens.xml:  Text padding for dropdown items -->
+    <!--  <dimen name="dropdownitem_text_padding_left">8dip</dimen> -->
+    <dimen name="spinner_today_padding">8dp</dimen>
+
+    <!-- Text size -->
+    <!-- AppTopFragment -->
+    <dimen name="measurement_label_text_size">28sp</dimen>
+    <!-- 各端末で定義 -->
+    <dimen name="data_value_text_size">56sp</dimen>
+    <dimen name="measurement_value_text_size">28sp</dimen>
+    <!-- Phoneでは未使用だか他の端末用にここに定義が必要 ※Tabletのsw600dp, sw720dpで使用 -->
+    <dimen name="button_label_text_size">16sp</dimen>
+    <!-- 各端末で定義 -->
+    <dimen name="checkbox_text_size">16sp</dimen>
+    <!-- Picker TextView TextSize -->
+    <dimen name="picker_view_text_size">16sp</dimen>
+    <!-- BeforeToday spinner: spinnerItem, spinnerDropdownItem textSize -->
+    <dimen name="before_day_spinner_text_size">16sp</dimen>
+    <!-- Custom ActionBar Title/Subtitle small textSize -->
+    <dimen name="action_bar_title_text_size">17sp</dimen>
+    <dimen name="action_bar_subtitle_text_size">13sp</dimen>
 </resources>

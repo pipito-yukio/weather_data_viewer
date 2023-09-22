@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dreamexample.android.weatherdataviewer.MainActivity">
+    <item
+        android:id="@+id/actionWeatherDataViewerSettings"
+        android:title="@string/action_menu_settings_saved_files"
+        app:showAsAction="never" />
+</menu>

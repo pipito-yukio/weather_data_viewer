@@ -1,14 +1,26 @@
 package com.dreamexample.android.weatherdataviewer.tasks;
 
+import static com.dreamexample.android.weatherdataviewer.functions.MyLogging.DEBUG_OUT;
+
 import android.os.Handler;
 import android.util.Log;
 
-import com.dreamexample.android.weatherdataviewer.data.ResponseStatus;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.dreamexample.android.weatherdataviewer.data.ResponseStatus;
+import com.dreamexample.android.weatherdataviewer.data.ResponseWarningStatus;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
@@ -17,22 +29,35 @@ public abstract class WeatherRepository<T> {
 
     public WeatherRepository() {}
 
-    public void makeCurrentTimeDataRequest(
-            int urlIdx,
-            String baseUrl,
-            String requestParameter,
-            Map<String, String> headers,
-            ExecutorService executor,
-            Handler handler,
+    /**
+     * GETリクエスト生成メソッド
+     * @param pathIdx パス用インデックス ※サブクラスで複数のGETリクエストパス定義
+     * @param baseUrl パスを含まないURL (Wifi | Mobile)
+     * @param requestParameter リクエストパラメータ (null可)
+     * @param headers リクエストヘッダー
+     * @param executor スレッドエクゼキューター
+     * @param handler Android Handlerオブジェクト
+     * @param callback Activity(Fragment)が結果を受け取るコールバック
+     */
+    public void makeGetRequest(
+            int pathIdx,
+            @NonNull String baseUrl,
+            @Nullable String requestParameter,
+            @NonNull Map<String, String> headers,
+            @NonNull ExecutorService executor,
+            @NonNull Handler handler,
             final RepositoryCallback<T> callback) {
         executor.execute(() -> {
             try {
-                String requestUrl = baseUrl + getRequestPath(urlIdx) + requestParameter;
-                Log.d(TAG, "requestUrl:" + requestUrl);
+                String requestUrl = baseUrl + getRequestPath(pathIdx)
+                        + (requestParameter != null ? requestParameter: "");
+                DEBUG_OUT.accept(TAG, "requestUrl:" + requestUrl);
                 Result<T> result =
-                        getSynchronousCurrentTimeDataRequest(requestUrl, headers);
+                        getRequest(requestUrl, headers);
+                // 200, 4xx - 50x系
                 notifyResult(result, callback, handler);
             } catch (Exception e) {
+                // サーバー側のレスポンスBUGか, Android側のBUG想定
                 Result<T> errorResult = new Result.Error<>(e);
                 notifyResult(errorResult, callback, handler);
             }
@@ -45,37 +70,92 @@ public abstract class WeatherRepository<T> {
         handler.post(() -> callback.onComplete(result));
     }
 
-    private Result<T> getSynchronousCurrentTimeDataRequest(
+    private Result<T> getRequest(
             String requestUrl, Map<String, String> requestHeaders) {
+        HttpURLConnection conn = null;
         try {
             URL url = new URL(requestUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("Content-Type", "application/json;charset=utf8");
             conn.setRequestProperty("Accept", "application/json;");
             for (String key : requestHeaders.keySet()) {
                 conn.setRequestProperty(key, requestHeaders.get(key));
             }
+
             // Check response code: allow 200 only.
-            Log.d(TAG, "ResponseCode: " + conn.getResponseCode());
-            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                T result = parseInputStream(conn.getInputStream());
-                Log.d(TAG, "ResponseResult: " + result);
+            int respCode = conn.getResponseCode();
+            DEBUG_OUT.accept(TAG, "ResponseCode:" + respCode);
+            if (respCode == HttpURLConnection.HTTP_OK) {
+                String respText = getResponseText(conn.getInputStream());
+                T result = parseResultJson(respText);
                 return new Result.Success<>(result);
             } else {
-                ResponseStatus status = new ResponseStatus(
-                        conn.getResponseCode(),
-                        conn.getResponseMessage());
-                Log.d(TAG, "Warning::ResponseStatus: " + status);
+                // 4xx - 50x
+                // Flaskアプリからはエラーストリームが生成される
+                String respText = getResponseText(conn.getErrorStream());
+                DEBUG_OUT.accept(TAG, "NG.Response.JSON: \n" + respText);
+                // ウォーニング時のJSONはデータ部が存在しないのでウォーニング専用ハースを実行
+                ResponseStatus status = getWarningStatus(respText);
                 return new Result.Warning<>(status);
             }
-        } catch (IOException ie) {
+        } catch (Exception ie) {
             Log.w(TAG, ie.getLocalizedMessage());
             return new Result.Error<>(ie);
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
         }
     }
 
-    public abstract String getRequestPath(int urlIdx);
+    /**
+     * 入力ストリームからJSON文字列を取得
+     * @param is 入力ストリーム
+     * @return JSON文字列
+     * @throws IOException IO例外
+     */
+    public String getResponseText(InputStream is) throws IOException {
+        StringBuilder sb;
+        try (BufferedReader bf = new BufferedReader
+                (new InputStreamReader(is, StandardCharsets.UTF_8))) {
+            String line;
+            sb = new StringBuilder();
+            while ((line = bf.readLine()) != null) {
+                sb.append(line);
+            }
+        }
+        return sb.toString();
+    }
 
-    public abstract T parseInputStream(InputStream is) throws IOException;
+    /**
+     * ウォーニング時のレスポンスオブジェクトを取得する
+     * <pre>ウォーニング時にサーバーが返却するレスポンス例
+     {"status": {"code": 400,"message": "461,User is not found."}}
+     * </pre>
+     * @param jsonText ウォーニング用JSON文字列
+     * @return レスポンスオブジェクト<br/>
+     *   ResponseStatusオブジェクトのみがセットされDataオブジェクトはnullがセットされる
+     * @throws JsonParseException パース例外
+     */
+    public ResponseStatus getWarningStatus(String jsonText) throws JsonParseException {
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        ResponseWarningStatus warningStatus = gson.fromJson(jsonText, ResponseWarningStatus.class);
+        return warningStatus.getStatus();
+    }
+
+    /**
+     * リクエストパスを取得する
+     * @param pathIdx パスインデックス (1 - m)
+     * @return サブクラスが提供するパス
+     */
+    public abstract String getRequestPath(int pathIdx);
+
+    /**
+     * HTTP 200(OK) レスポンス時のJSON文字列をパースしてJavaオブジェクトを生成
+     * @param jsonText JSON文字列を
+     * @return サブグラスが定義するJavaオブジェクトを生成
+     * @throws JsonParseException GSONのパース例外
+     */
+    public abstract T parseResultJson(String jsonText) throws JsonParseException;
+
 }

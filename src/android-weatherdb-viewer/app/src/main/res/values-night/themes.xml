@@ -10,7 +10,33 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- Button textColor, backgroudColor -->
+        <item name="updateButtonTextColor">@color/white</item>
+        <item name="updateButtonBgColor">@color/purple_500</item>
+        <!-- for custom Button drawable -->
+        <item name="disabledAlpha">@dimen/disabledAlpha</item>
+        <!-- RadioButton textColor -->
+        <item name="myAppPrimaryTextColor">@color/black</item>
+        <!-- SpinnerItem / SpinnerDropdownItem textColor -->
+        <item name="spinnerTextColor">@color/black</item>
+        <item name="spinnerBgColor">@color/teal_200</item>
+        <!-- アプリの全てのスピナーPopupの背景 -->
+        <item name="spinnerPopupBgColor">@color/teal_200</item>
+        <!-- TextViw background drawable reference -->
+        <item name="inpTextFrameBgDrawable">@drawable/input_textview_frame</item>
+        <item name="inpTextFrameFgColor">@color/purple_700</item>
+        <!-- Warning TextView on Dark -->
+        <item name="warningBgDrawable">@drawable/warning_textview_frame_dark</item>
+        <item name="warningFgColor">@color/solid_red</item>
+        <!-- Custom ActionBarStyle -->
+        <item name="actionBarStyle">@style/MyAppNightActionBar</item>
+    </style>
+
+    <!-- backgroud=@null -->
+    <style name="MyAppNightActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/MyAppActionBar.TitleTextStyle</item>
+        <item name="subtitleTextColor">@style/MyAppActionBar.SubtitleTextStyle</item>
     </style>
 </resources>

@@ -1,31 +1,108 @@
 <resources>
     <string name="app_name">気象データビューワー</string>
-    <string name="lbl_mesurement_time">測定時刻</string>
+    <string name="action_menu_settings_saved_files">取得データ保存設定</string>
+    <string name="title_settings_activity">気象データビューワー設定画面</string>
+
+    <string name="lbl_measurement_time">測定時刻</string>
     <string name="lbl_temp_out">外気温</string>
     <string name="lbl_temp_in">気温</string>
     <string name="lbl_humid">湿度</string>
     <string name="lbl_pressure">気圧</string>
     <string name="lbl_btn_update">更新</string>
-    <string name="fotter_lbl_doci">℃</string>
-    <string name="fotter_lbl_percent">％</string>
-    <string name="fotter_lbl_pressure">hPa</string>
+    <string name="footer_lbl_temper_celsius">℃</string>
+    <string name="footer_lbl_percent">％</string>
+    <string name="footer_lbl_pressure">hPa</string>
     <string name="init_measurement_time">0000&#8211;00&#8211;00 00:00</string>
     <string name="init_measurement_value">----</string>
-    <string name="init_responsestatus_value">Warning</string>
+    <string name="init_response_warning_value">Warning</string>
     <string name="format_warning">[%d] %s</string>
-    <string name="msg_network_not_available">ネットワークが利用できません！</string>
-    <string name="msg_gettting_data">データ取得中&#8230;</string>
-    <string name="msg_gettting_graph">画像取得中&#8230;</string>
-    <string name="lbl_today">今日</string>
-    <string name="lbl_range_days">今日から</string>
-    <string name="lbl_before_days">日前迄</string>
-    <string name="FAB_contentDescription">FAB for screen navigate</string>
+    <string name="msg_getting_data">データ取得中&#8230;</string>
+    <string name="msg_getting_graph">画像取得中&#8230;</string>
+    <string name="lbl_radio_today">本日</string>
+    <string name="lbl_radio_before_day">何日前指定</string>
+    <string name="lbl_jp_to">日前〜終了日</string>
+    <string name="inp_data_picker_init_value">2099年12月31日</string>
     <string name="IMG_contentDescription">Matplotlib output image</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">取消し</string>
 
-    <string-array name="beforeDays">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>7</item>
-    </string-array>
+    <!-- 表示用の日付・時刻用フォーマット -->
+    <string name="format_show_date">%04d年%02d月%02d日</string>
+    <!-- 日付のTag用フォーマット -->
+    <string name="format_tag_date">%04d-%02d-%02d</string>
+    <!-- 測定日付のテキスト幅設定目的 -->
+    <string name="init_show_date_value">2023年01月01 日</string>
+    <string name="init_tag_date_value">2023&#8211;01&#8211;01</string>
+
+    <!-- トップページフラグメント -->
+    <string name="lbl_sensor">センサー</string>
+    <string name="chk_get_latest">最新取得</string>
+    <string name="sensor_devices">センサーデバイスリスト</string>
+    <!-- ベースフラグメント -->
+    <string name="msg_implicitly_requesting">サーバーと通信中…</string>
+    <string name="msg_implicitly_completed">通信完了</string>
+
+    <!-- Fragment -->
+    <string name="app_title_frag_top">気象データ表示版データ表示</string>
+    <string name="app_title_frag_graph_before_days">指定期間の気象データグラフ表示</string>
+
+    <!-- ウォーニング時のダイアログタイトル-->
+    <string name="warning_title_selected_picker_day">終了日の変更</string>
+    <!-- ウォーニングメッセージ -->
+    <string name="warning_code_message">[%d] %s</string>
+    <string name="warning_network_not_available">ネットワークが利用できません！</string>
+    <string name="warning_get_data_with_reason">データ取得エラー (%s)</string>
+    <string name="exception_with_reason">サーバーエラー (%s)</string>
+    <string name="error_response_dialog_title">気象データリクエスト</string>
+    <string name="warning_save_with_2reason">%sのJSONファイル保存失敗(%s)</string>
+    <string name="warning_data_not_found_with_device">指定センサーの観測データ無し</string>
+    <string name="warning_today_image_record_none">本日の観測データ無し</string>
+    <string name="warning_before_image_record_none">終了日からN日前の観測データ無し</string>
+    <string name="warning_not_select_future_day">未来日は選択できません！</string>
+
+    <!-- ファイル名キー -->
+    <string name="devices_json_file">devices.json</string>
+
+    <!-- SharedPreference 保存キー -->
+    <!-- アプリ初回起動時にSettingsActivityが未実行なら起動するため -->
+    <string name="pref_exec_settings_activity">exec_settings_activity</string>
+    <string name="pref_app_top_fragment">appTopFragment</string>
+    <!-- トップ画面のセンサースピナーから選択されたセンサー説明 -->
+    <string name="pref_selected_device_description">selected_device_description</string>
+    <!-- 同上に対応するセンサー名 ※必須リクエストパラメータ -->
+    <string name="pref_selected_device_name">selected_device_name</string>
+    <!-- 保存ファイル名 -->
+    <string name="file_name_latest_data">latest_data.json</string>
+    <string name="file_name_today_image">today_image.png</string>
+    <string name="file_mame_before_image">before_image.png</string>
+    <!-- 保存ファイルへのプリファレンスキー ※保存ファイルの絶対パスを設定 -->
+    <string name="pref_frag_top_latest_data_path">frag_top_latest_data_path</string>
+    <string name="pref_frag_today_today_image_path">frag_today_today_image_path</string>
+    <string name="pref_frag_today_before_image_path">frag_today_before_image_path</string>
+    <!-- onStop時に所要の保存処理が完了したかどうかのキー -->
+    <string name="pref_frag_top_stop_saved">frag_top_stop_saved</string>
+    <string name="pref_frag_today_stop_saved">frag_today_stop_saved</string>
+    <string name="pref_value_stop_saved">onStopSaved</string>
+    <!-- 当日画像フラグメント: 当日ラジオボタンのチェック状態 -->
+    <string name="pref_frag_today_radio_today_checked">radio_today_checked</string>
+    <!-- N日前スピナー選択値 -->
+    <string name="pref_frag_today_selected_before_day">selected_before_day</string>
+    <!-- 終了日 (当日 | 過去) -->
+    <string name="pref_frag_today_start_day">change_start_day</string>
+    <!-- ファイル保存時のエラーメッセージ -->
+    <string name="warning_latest_data_save_error">最新データ保存失敗</string>
+    <string name="warning_today_image_save_error">画像データ保存失敗</string>
+    <!-- ファイル読込み時のエラーメッセージ -->
+    <string name="warning_load_devices_error">センサーディバイスリスト読み込み失敗</string>
+
+    <!-- SettingsActivity -->
+    <string name="pref_screen_category_save_data_title">取得した最新データと画像の保存設定</string>
+    <string name="pref_screen_save_latest_data_title">最新データの保存</string>
+    <string name="pref_screen_save_latest_data_summary">最後に取得した最新データを保存します</string>
+    <string name="pref_screen_save_today_image_title">画像データの保存</string>
+    <string name="pref_screen_save_today_image_summary">画像取得画面の種類に応じて画像データを保存します</string>
+    <!-- keys -->
+    <string name="pref_screen_key_save_latest_data">pref_screen_save_latest_data</string>
+    <string name="pref_screen_key_save_today_image">pref_screen_save_today_image</string>
+
 </resources>

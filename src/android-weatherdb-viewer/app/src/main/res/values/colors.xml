@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- resource color_material.xml -->
+    <color name="button_material_dark">#ff5a595b</color>
+    <color name="button_material_light">#ffd6d7d7</color>
+    <color name="design_default_color_background">#FFFFFF</color>
+    <color name="design_default_color_error">#B00020</color>
+    <color name="design_default_color_on_primary">#FFFFFF</color>
+    <color name="design_default_color_on_secondary">#000000</color>
+    <color name="design_default_color_primary">#6200EE</color>
+    <color name="design_default_color_primary_dark">#3700B3</color>
+    <color name="design_default_color_primary_variant">#3700B3</color>
+    <color name="design_default_color_secondary">#03DAC6</color>
+    <color name="design_default_color_secondary_variant">#018786</color>
+    <color name="design_default_color_surface">#FFFFFF</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -9,7 +23,36 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FFFF0000</color>
     <color name="yellow_dark">#FFFFCC33</color>
-    <color name="oange">#FFFFA500</color>
+    <color name="orange">#FFFFA500</color>
     <color name="orange_red">#FFFF4500</color>
     <color name="khaki">#FFF0E68C</color>
+    <color name="gray">#FFCCCCCC</color>
+
+    <!-- ADD -->
+    <drawable name="blue">#770000ff</drawable>
+    <drawable name="green">#7700ff00</drawable>
+    <drawable name="yellow">#77ffff00</drawable>
+    <drawable name="screen_background_black">#ff000000</drawable>
+    <drawable name="translucent_background">#e0000000</drawable>
+    <drawable name="transparent_background">#00000000</drawable>
+    <drawable name="spinner_background">#7700ff33</drawable>
+
+    <color name="solid_red">#ffff0000</color>
+    <color name="solid_blue">#0000ff</color>
+    <color name="solid_green">#f0f0</color>
+    <color name="solid_yellow">#ffffff00</color>
+    <color name="purple">#ff884488</color>
+    <!-- TextColor for dark mode -->
+    <color name="aquamarine">#ff7fffd4</color>
+    <!-- WarningView text color(medium violet) at Dark mode -->
+    <color name="warning_bg_color_dark">#fff5f5f5</color>
+    <!-- opacity: 30% (4d), safe color: light gray for drawable color for Theme Lite -->
+    <color name="inp_text_frame_bg_color">#4d666666</color>
+    <!-- opacity: 20% (33), safe color: white smoke for drawable color for Theme Dark -->
+    <color name="inp_text_frame_bg_color_dark">#33f5f5f5</color>
+    <!-- TextView for title frame -->
+    <!-- safe color: opacity 30%, dark gray -->
+    <color name="title_frame_bg_color">#4d808080</color>
+    <!-- safe color: opacity 20%, dark gray -->
+    <color name="title_frame_bg_color_dark">#33d3d3d3</color>
 </resources>
