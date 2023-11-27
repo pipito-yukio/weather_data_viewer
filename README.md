@@ -126,7 +126,7 @@ http://[raspi|your1].dreamexample.com:12345/plot_weather/getlastdataforphone
    ServerName raspi.dreamexample.com
    ProxyRequests Off
 
-   ProxyPassMatch /plot_weather/get(.+?)forphone http://raspi-4local:12345/plot_weather/get$1forphone
+   ProxyPassMatch /plot_weather/get(.+?)forphone http://raspi-4.local:12345/plot_weather/get$1forphone
    ProxyPassReverse /plot_weather/get(.+?)forphone http://raspi-4.local:12345/plot_weather/get$1forphone
 </VirtualHost>
 ```
