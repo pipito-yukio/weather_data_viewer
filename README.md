@@ -120,14 +120,14 @@ http://[raspi|your1].dreamexample.com:12345/plot_weather/getlastdataforphone
    ProxyPassReverse /plot_weather/get(.+?)forphone http://your1.local:12345/plot_weather/get$1forphone
 </VirtualHost>
 ```
-(2) ラズパイ(本番環境)にアクセスするリバースプロキシ設定
+(2) ラズパイ４(本番環境)にアクセスするリバースプロキシ設定
 ```
 <VirtualHost *:12345>
    ServerName raspi.dreamexample.com
    ProxyRequests Off
 
-   ProxyPassMatch /plot_weather/get(.+?)forphone http://raspi-zero.local:12345/plot_weather/get$1forphone
-   ProxyPassReverse /plot_weather/get(.+?)forphone http://raspi-zero.local:12345/plot_weather/get$1forphone
+   ProxyPassMatch /plot_weather/get(.+?)forphone http://raspi-4local:12345/plot_weather/get$1forphone
+   ProxyPassReverse /plot_weather/get(.+?)forphone http://raspi-4.local:12345/plot_weather/get$1forphone
 </VirtualHost>
 ```
 
