@@ -22,9 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.dreamexample.android.weatherdataviewer.BuildConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.dreamexample.android.weatherdataviewer.BuildConfig;
 import com.dreamexample.android.weatherdataviewer.MainActivity;
 import com.dreamexample.android.weatherdataviewer.MainActivity.SettingsChangeCallback;
 import com.dreamexample.android.weatherdataviewer.R;

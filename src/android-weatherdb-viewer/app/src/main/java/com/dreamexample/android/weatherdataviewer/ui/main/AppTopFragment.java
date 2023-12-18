@@ -28,6 +28,8 @@ import com.dreamexample.android.weatherdataviewer.data.DeviceItem;
 import com.dreamexample.android.weatherdataviewer.data.ResponseData;
 import com.dreamexample.android.weatherdataviewer.data.ResponseDataResult;
 import com.dreamexample.android.weatherdataviewer.data.ResponseStatus;
+import com.dreamexample.android.weatherdataviewer.data.TempOutStat;
+import com.dreamexample.android.weatherdataviewer.data.TempOutStatItem;
 import com.dreamexample.android.weatherdataviewer.functions.AppFragmentUtil;
 import com.dreamexample.android.weatherdataviewer.functions.FileManager;
 import com.dreamexample.android.weatherdataviewer.tasks.NetworkUtil;
@@ -53,6 +55,20 @@ public class AppTopFragment extends AppBaseFragment {
     private TextView mValTempIn;
     private TextView mValHumid;
     private TextView mValPressure;
+    // 外気温統計ウィジット
+    // (1) 当日日付はウィジットに表示しないため文字列変数に保持する
+    private String  mTempOutStatToday;
+    // (1) 当日の最低・最高気温
+    private TextView mTempOutStatMinAppearTime;
+    private TextView mTempOutStatMaxAppearTime;
+    private TextView mTempOutStatMinValue;
+    private TextView mTempOutStatMaxValue;
+    // (2) 前日の最低・最高気温
+    private TextView mTempOutStatBeforeDay;
+    private TextView mTempOutStatBeforeMinAppearTime;
+    private TextView mTempOutStatBeforeMaxAppearTime;
+    private TextView mTempOutStatBeforeMinValue;
+    private TextView mTempOutStatBeforeMaxValue;
     // ウォーニング表示用ビュー ※非表示
     private TextView mWarningView;
     // 下部コンテナーウィジット
@@ -274,14 +290,26 @@ public class AppTopFragment extends AppBaseFragment {
         DEBUG_OUT.accept(TAG, "onCreateView()");
 
         View mainView = inflater.inflate(R.layout.fragment_top_main, container, false);
-        mWarningView = mainView.findViewById(R.id.tvWearningStatusView);
+        mWarningView = mainView.findViewById(R.id.tvWarningStatusView);
         mValMeasurementDatetime = mainView.findViewById(R.id.valMeasurementDatetime);
         mValTempOut = mainView.findViewById(R.id.valTempOut);
-        mValTempIn = mainView.findViewById(R.id.valTempin);
+        mValTempIn = mainView.findViewById(R.id.valTempIn);
         mValHumid = mainView.findViewById(R.id.valHumid);
         mValPressure = mainView.findViewById(R.id.valPressure);
         mBtnUpdate = mainView.findViewById(R.id.btnTopFragUpdate);
         mBtnUpdate.setOnClickListener(mButtonClickListener);
+        // 外気温統計 (1) 当日
+        mTempOutStatMinAppearTime = mainView.findViewById(R.id.valMinAppearTime);
+        mTempOutStatMaxAppearTime = mainView.findViewById(R.id.valMaxAppearTime);
+        mTempOutStatMinValue = mainView.findViewById(R.id.valMinTempOut);
+        mTempOutStatMaxValue = mainView.findViewById(R.id.valMaxTempOut);
+        // 外気温統計 (2) 前日
+        mTempOutStatBeforeDay = mainView.findViewById(R.id.valBeforeStatDay);
+        mTempOutStatBeforeMinAppearTime = mainView.findViewById(R.id.valBeforeMinAppearTime);
+        mTempOutStatBeforeMaxAppearTime = mainView.findViewById(R.id.valBeforeMaxAppearTime);
+        mTempOutStatBeforeMinValue = mainView.findViewById(R.id.valBeforeMinTempOut);
+        mTempOutStatBeforeMaxValue = mainView.findViewById(R.id.valBeforeMaxTempOut);
+
         // センサー関連ウィジット
         // センサーデバイススピナー
         initSpinnerView(mainView);
@@ -399,13 +427,13 @@ public class AppTopFragment extends AppBaseFragment {
                 });
     }
 
-    private void showSuccess(ResponseData data) {
+    private void showSuccess(@NonNull ResponseData data) {
         // ウォーニングが表示されていたら閉じる
         hideWarningView();
         showDataViews(data);
     }
 
-    private void showDataViews(ResponseData data) {
+    private void showDataViews(@NonNull ResponseData data) {
         mValMeasurementDatetime.setText(
                 (data.getMeasurementTime() != null ? data.getMeasurementTime() :
                         getResources().getString(R.string.init_measurement_time))
@@ -415,6 +443,39 @@ public class AppTopFragment extends AppBaseFragment {
         mValHumid.setText(String.valueOf(data.getHumid()));
         long pressure = Math.round(data.getPressure());
         mValPressure.setText(String.valueOf(pressure));
+        // 外気温当日
+        TempOutStat tempOutStatToday = data.getTempOutStatToday();
+        // 外気温前日 ※Null可
+        TempOutStat tempOutStatBefore = data.getTempOutStatBefore();
+        showTempOutStatViews(tempOutStatToday, tempOutStatBefore);
+    }
+
+    private void showTempOutStatViews(@Nullable TempOutStat statToday,
+                                      @Nullable TempOutStat statBefore) {
+        // 2023-12-04: 古いバージョンのJSONファイルが残っている場合がある
+        //  古いバージョンアプリをアンインストールし、再度アプリをインストールしてもJSONファイルが残っている
+        // (1) 当日
+        if (statToday != null) {
+            mTempOutStatToday = statToday.getMeasurementDate();
+            // 最低気温情報
+            mTempOutStatMinAppearTime.setText(statToday.getMin().getAppearTime());
+            mTempOutStatMinValue.setText(String.valueOf(statToday.getMin().getTemper()));
+            // 最高気温情報
+            mTempOutStatMaxAppearTime.setText(statToday.getMax().getAppearTime());
+            mTempOutStatMaxValue.setText(String.valueOf(statToday.getMax().getTemper()));
+        } else {
+            resetTempOutStatTodayViews();
+        }
+        // (2) 前日はないケースがある ※当日が運用開始日なら前日は存在しない
+        if (statBefore != null) {
+            mTempOutStatBeforeDay.setText(statBefore.getMeasurementDate());
+            mTempOutStatBeforeMinAppearTime.setText(statBefore.getMin().getAppearTime());
+            mTempOutStatBeforeMinValue.setText(String.valueOf(statBefore.getMin().getTemper()));
+            mTempOutStatBeforeMaxAppearTime.setText(statBefore.getMax().getAppearTime());
+            mTempOutStatBeforeMaxValue.setText(String.valueOf(statBefore.getMax().getTemper()));
+        } else {
+            resetTempOutStatBeforeViews();
+        }
     }
 
     private void resetDataViews() {
@@ -424,6 +485,70 @@ public class AppTopFragment extends AppBaseFragment {
         mValTempIn.setText(initVal);
         mValHumid.setText(initVal);
         mValPressure.setText(initVal);
+        // 外気温日統計リセット
+        resetTempOutStatViews();
+    }
+
+    private void resetTempOutStatTodayViews() {
+        mTempOutStatMinAppearTime.setText(getString(R.string.init_temp_out_stat_appear_time));
+        mTempOutStatMinValue.setText(getString(R.string.init_temp_out_stat_value));
+        mTempOutStatMaxAppearTime.setText(getString(R.string.init_temp_out_stat_appear_time));
+        mTempOutStatMaxValue.setText(getString(R.string.init_temp_out_stat_value));
+    }
+
+    private void resetTempOutStatBeforeViews() {
+        mTempOutStatBeforeDay.setText(getString(R.string.init_before_stat_day));
+        mTempOutStatBeforeMinAppearTime.setText(getString(R.string.init_temp_out_stat_appear_time));
+        mTempOutStatBeforeMinValue.setText(getString(R.string.init_temp_out_stat_value));
+        mTempOutStatBeforeMaxAppearTime.setText(getString(R.string.init_temp_out_stat_appear_time));
+        mTempOutStatBeforeMaxValue.setText(getString(R.string.init_temp_out_stat_value));
+    }
+
+    private void resetTempOutStatViews() {
+        // (1) 当日
+        resetTempOutStatTodayViews();
+        // (2) 前日
+        resetTempOutStatBeforeViews();
+    }
+
+    private TempOutStat getTempOutStatToday() {
+        // 外気温 当時統計
+        String statMinAppearTime = mTempOutStatMinAppearTime.getText().toString();
+        String statMaxAppearTime = mTempOutStatMaxAppearTime.getText().toString();
+        String strStatMinValue = mTempOutStatMinValue.getText().toString();
+        String strStatMaxValue = mTempOutStatMaxValue.getText().toString();
+        // 外気温 当日統計
+        double statMinTemper = Double.parseDouble(strStatMinValue);
+        double statMaxTemper = Double.parseDouble(strStatMaxValue);
+        TempOutStatItem statMin = new TempOutStatItem(statMinAppearTime, statMinTemper);
+        TempOutStatItem statMax = new TempOutStatItem(statMaxAppearTime, statMaxTemper);
+        return new TempOutStat(statMin, statMax, mTempOutStatToday/* 日付文字列 */);
+    }
+
+    private TempOutStat getTempOutStatBefore() {
+        // 前日データがない場合がある
+        String statMinAppearTime;
+        String statMaxAppearTime;
+        double statMinTemper;
+        double statMaxTemper;
+        if (mTempOutStatBeforeDay != null) {
+            statMinAppearTime = mTempOutStatBeforeMinAppearTime.getText().toString();
+            statMaxAppearTime = mTempOutStatBeforeMaxAppearTime.getText().toString();
+            String strMinValue = mTempOutStatBeforeMinValue.getText().toString();
+            String strMaxValue = mTempOutStatBeforeMaxValue.getText().toString();
+            statMinTemper = Double.parseDouble(strMinValue);
+            statMaxTemper = Double.parseDouble(strMaxValue);
+        } else {
+            statMinAppearTime = null;
+            statMaxAppearTime = null;
+            statMinTemper = Double.parseDouble(null);
+            statMaxTemper = Double.parseDouble(null);
+        }
+        TempOutStatItem staMin = new TempOutStatItem(statMinAppearTime, statMinTemper);
+        TempOutStatItem staMax = new TempOutStatItem(statMaxAppearTime, statMaxTemper);
+        String beforeDate = mTempOutStatBeforeDay != null ?
+                mTempOutStatBeforeDay.getText().toString() : null;
+        return new TempOutStat(staMin, staMax, beforeDate);
     }
 
     private ResponseData getLatestDataFromDataViews() {
@@ -435,13 +560,17 @@ public class AppTopFragment extends AppBaseFragment {
             String strTempIn = mValTempIn.getText().toString();
             String strHumid = mValHumid.getText().toString();
             String strPressure = mValPressure.getText().toString();
+            // 外気温 前日統計
             try {
+                // 本体気象データ
                 double tempOut = Double.parseDouble(strTempOut);
                 double tempIn = Double.parseDouble(strTempIn);
                 double humid = Double.parseDouble(strHumid);
                 double pressure = Double.parseDouble(strPressure);
+                TempOutStat statToday = getTempOutStatToday();
+                TempOutStat statBefore = getTempOutStatBefore();
                 return new ResponseData(measurementTime,
-                    tempOut, tempIn, humid, pressure, 1
+                    tempOut, tempIn, humid, pressure, 1, statToday, statBefore
                 );
             } catch (NumberFormatException nfe) {
                 Log.w(TAG, "getLatestDataFromDataViews.error: " + nfe.getLocalizedMessage());
@@ -511,6 +640,12 @@ public class AppTopFragment extends AppBaseFragment {
                     String json = FileManager.readTextFromFilePath(savedFileName);
                     DEBUG_OUT.accept(TAG, "restoreLatestData.json: " + json);
                     ResponseData data = getGson().fromJson(json, ResponseData.class);
+                    if (data == null) {
+                        // 2023-12-06: 古いバージョンのファイルを削除
+                        super.deleteOldDataJsonFile(savedFileName);
+                        return;
+                    }
+
                     showDataViews(data);
                     // 復元完了でキーを削除する
                     SharedPreferences.Editor editor = sharedPref.edit();

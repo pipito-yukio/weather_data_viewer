@@ -16,15 +16,22 @@ public class ResponseData {
     private final double pressure;
     @SerializedName("rec_count")
     private final int recCount;
+    @SerializedName("temp_out_stat_today")
+    private final TempOutStat tempOutStatToday;
+    @SerializedName("temp_out_stat_before")
+    private final TempOutStat tempOutStatBefore;
 
     public ResponseData(String measurementTime, double tempOut, double tempIn,
-                        double humid, double pressure, int recCount) {
+                        double humid, double pressure, int recCount,
+                        TempOutStat statToday, TempOutStat statBefore) {
         this.measurementTime = measurementTime;
         this.tempOut = tempOut;
         this.tempIn = tempIn;
         this.humid = humid;
         this.pressure = pressure;
         this.recCount = recCount;
+        this.tempOutStatToday = statToday;
+        this.tempOutStatBefore = statBefore;
     }
 
     public String getMeasurementTime() {
@@ -47,18 +54,31 @@ public class ResponseData {
         return pressure;
     }
 
-    public int getRecCount() { return recCount; }
+    public int getRecCount() {
+        return recCount;
+    }
+
+    public TempOutStat getTempOutStatToday() {
+        return tempOutStatToday;
+    }
+
+    public TempOutStat getTempOutStatBefore() {
+        return tempOutStatBefore;
+    }
 
     @NonNull
     @Override
     public String toString() {
         return "ResponseData{" +
-                "measurement_time='" + measurementTime + '\'' +
-                ", temp_out=" + tempOut +
-                ", temp_in=" + tempIn +
+                "measurementTime='" + measurementTime + '\'' +
+                ", tempOut=" + tempOut +
+                ", tempIn=" + tempIn +
                 ", humid=" + humid +
                 ", pressure=" + pressure +
-                ", rec_count=" + recCount +
+                ", recCount=" + recCount +
+                ", tempOutStatToday=" + tempOutStatToday +
+                ", tempOutStatBefore=" + tempOutStatBefore +
                 '}';
     }
+
 }

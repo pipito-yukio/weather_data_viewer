@@ -12,7 +12,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">@dimen/data_value_margin</item>
         <item name="android:padding">@dimen/data_value_padding</item>
-        <item name="android:paddingRight">@dimen/data_value_padding_right</item>
+        <item name="android:paddingEnd">@dimen/data_value_padding_end</item>
         <item name="android:gravity">right|center_vertical</item>
         <item name="android:text">@string/init_measurement_value</item>
         <item name="android:textSize">@dimen/data_value_text_size</item>
@@ -44,7 +44,50 @@
         <item name="android:layout_margin">@dimen/data_value_margin</item>
         <item name="android:padding">@dimen/data_label_padding</item>
         <item name="android:gravity">right|center_vertical</item>
+        <item name="android:textSize">@dimen/data_label_text_size</item>
     </style>
+
+    <!-- 外気温 日統計スタイル -->
+    <!-- ConstraintLayout内で使用する  -->
+    <style name="BaseTempOutStatStyle" parent="StyleMeasurementTimeTitle">
+        <item name="android:padding">@dimen/temp_out_stat_value_padding</item>
+    </style>
+    <style name="StyleTempOutStatTitle" parent="BaseTempOutStatStyle">
+        <item name="android:layout_marginStart">@dimen/temp_out_stat_start_margin</item>
+        <item name="android:layout_marginTop">@dimen/temp_out_stat_top_margin</item>
+        <item name="android:textSize">@dimen/temp_out_stat_title_text_size</item>
+    </style>
+    <!-- ラベル "測定時刻" のスタイルを継承 -->
+    <style name="StyleTempOutStatLabel" parent="BaseTempOutStatStyle">
+        <item name="android:layout_marginEnd">@dimen/temp_out_stat_end_margin</item>
+        <item name="android:textSize">@dimen/temp_out_stat_label_text_size</item>
+    </style>
+    <style name="StyleTempOutStatUnitLabel" parent="BaseTempOutStatStyle">
+        <item name="android:layout_marginStart">@dimen/temp_out_stat_start_margin</item>
+        <item name="android:layout_marginEnd">@dimen/temp_out_stat_end_margin</item>
+        <item name="android:textSize">@dimen/temp_out_stat_label_text_size</item>
+    </style>
+    <!-- 出現時刻は測定時刻と同じスタイルで サイズ+2sp -->
+    <style name="StyleTempOutStatAppearTime" parent="StyleMeasurementTimeValue">
+        <item name="android:textSize">@dimen/temp_out_stat_value_text_size</item>
+    </style>
+    <!-- 気温は右寄せ -->
+    <style name="StyleTempOutStatTempValue" parent="StyleTempOutStatAppearTime">
+        <item name="android:paddingEnd">@dimen/temp_out_stat_temp_padding_end</item>
+        <item name="android:gravity">right</item>
+    </style>
+    <!-- 前日日付 サイズ -->
+    <style name="StyleTempOutStatBeforeDay">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/temp_out_stat_value_text_size</item>
+        <item name="android:textColor">@color/orange_red</item>
+        <item name="android:background">@android:color/black</item>    </style>
 
     <!-- Fragment 共通 -->
     <!-- ウォーニングビュー -->

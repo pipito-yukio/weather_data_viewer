@@ -25,6 +25,15 @@
     <string name="IMG_contentDescription">Matplotlib output image</string>
     <string name="alert_dialog_ok">OK</string>
     <string name="alert_dialog_cancel">取消し</string>
+    <!-- 外気温 当日統計データ: 発現時刻あり -->
+    <string name="lbl_stat_temp_out_title">外気温 当日統計</string>
+    <string name="lbl_stat_temp_min">最低</string>
+    <string name="lbl_stat_temp_max">最高</string>
+    <string name="init_temp_out_stat_appear_time">00:00</string>
+    <string name="init_temp_out_stat_value">---.-</string>
+    <!-- 外気温 前日データ: 最低・最高気温のみ -->
+    <string name="lbl_before_stat_temp_out_title">外気温 前日</string>
+    <string name="init_before_stat_day">0000-00-00</string>
 
     <!-- 表示用の日付・時刻用フォーマット -->
     <string name="format_show_date">%04d年%02d月%02d日</string>
@@ -87,8 +96,6 @@
     <string name="pref_frag_today_radio_today_checked">radio_today_checked</string>
     <!-- N日前スピナー選択値 -->
     <string name="pref_frag_today_selected_before_day">selected_before_day</string>
-    <!-- 終了日 (当日 | 過去) -->
-    <string name="pref_frag_today_start_day">change_start_day</string>
     <!-- ファイル保存時のエラーメッセージ -->
     <string name="warning_latest_data_save_error">最新データ保存失敗</string>
     <string name="warning_today_image_save_error">画像データ保存失敗</string>

@@ -41,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
     ViewPager2 mViewPager2;
     ViewPager2.OnPageChangeCallback mOnPageChangeCallback;
 
+    // SettingsActivityのデフォルトプリファレンス
     private SharedPreferences mDefaultPref;
 
+    // SettingsActivityのプリファレンスの変更をモニターするクライアントの一覧(マップ)
     private final Map<String, SettingsChangeCallback> mSettingsChangeCallbacks = new HashMap<>();
 
-    // SettingsActivityでの設定変更リスナー
+    // SettingsActivityのプリファレンスウィジットの状態変更をクライアントに通知するリスナー
     private final OnSharedPreferenceChangeListener mSharedPrefListener = (pref, key) -> {
         DEBUG_OUT.accept(TAG, "mSharedPrefListener.key: " + key);
         if (mSettingsChangeCallbacks.containsKey(key)) {
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         // for DEBUG
         DEBUG_OUT.accept(TAG, "DefaultSharedPreferences: " + sharedPref.getAll());
 
-        // プリファレンスの変更をモニタする
+        // SettingsActivityの変更をモニタするリスナー登録
         mDefaultPref = PreferenceManager.getDefaultSharedPreferences(this);
         mDefaultPref.registerOnSharedPreferenceChangeListener(mSharedPrefListener);
     }
@@ -125,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         DEBUG_OUT.accept(TAG, "onDestroy()");
 
+        // SettingsActivityの変更をモニタするリスナー登録
         mDefaultPref.unregisterOnSharedPreferenceChangeListener(mSharedPrefListener);
+        // クライアントのコールバックをクリア
         mSettingsChangeCallbacks.clear();
     }
 
@@ -168,14 +172,17 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO
-    public Map<String, SettingsChangeCallback> getSettingsChangeCallbacks() {
-        return mSettingsChangeCallbacks;
-    }
-
     private void showSettingsActivity() {
         Intent settingsIntent = new Intent(this, SettingsActivity.class);
         startActivity(settingsIntent);
+    }
+
+    /**
+     * SettingsActivityで変更した値をモニターするコールバックのマップを取得する
+     * @return コールバックのマップ
+     */
+    public Map<String, SettingsChangeCallback> getSettingsChangeCallbacks() {
+        return mSettingsChangeCallbacks;
     }
 
 }

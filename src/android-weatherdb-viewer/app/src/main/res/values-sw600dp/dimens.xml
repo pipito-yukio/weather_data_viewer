@@ -8,6 +8,11 @@
     <dimen name="radioButtonScale">1.00</dimen>
 
     <!-- Fragment共通 -->
+    <!-- AppTopFragment -->
+    <dimen name="measurement_time_value_margin_left">5dp</dimen>
+    <dimen name="data_value_margin">5dp</dimen>
+    <dimen name="data_value_padding">5dp</dimen>
+    <dimen name="data_value_padding_end">22dp</dimen>
     <!-- Buttonは長方形なので幅のpaddingサイズが異なる -->
     <dimen name="button_label_padding">6dp</dimen>
     <dimen name="button_label_padding_horizontal">10dp</dimen>
@@ -24,8 +29,24 @@
     <dimen name="spinner_today_padding">10dp</dimen>
 
     <!-- Text size -->
-    <dimen name="measurement_value_text_size">36sp</dimen>
-    <dimen name="data_value_text_size">70sp</dimen>
+    <!-- AppTopFragment -->
+    <!-- 各端末で定義 -->
+    <dimen name="measurement_label_text_size">28sp</dimen>
+    <dimen name="measurement_value_text_size">34sp</dimen>
+    <dimen name="data_label_text_size">26sp</dimen>
+    <dimen name="data_value_text_size">44sp</dimen>
+    <!-- TempOut Statistics in ConstraintLayout -->
+    <dimen name="temp_out_stat_title_text_size">26sp</dimen>
+    <dimen name="temp_out_stat_label_text_size">24sp</dimen>
+    <dimen name="temp_out_stat_value_text_size">28sp</dimen>
+    <dimen name="temp_out_stat_top_margin">5dp</dimen>
+    <dimen name="temp_out_stat_start_margin">10dp</dimen>
+    <dimen name="temp_out_stat_end_margin">5dp</dimen>
+    <dimen name="temp_out_stat_temp_padding_end">15dp</dimen>
+    <dimen name="temp_out_stat_value_padding">3dp</dimen>
+    <dimen name="temp_out_stat_2nd_top_margin">18dp</dimen>
+    <dimen name="temp_out_stat_3rd_top_margin">26dp</dimen>
+    <dimen name="guid_line_temp_out_stat_begin">44dp</dimen>
     <!-- Button textSize -->
     <dimen name="button_label_text_size">16sp</dimen>
     <dimen name="checkbox_text_size">18sp</dimen>

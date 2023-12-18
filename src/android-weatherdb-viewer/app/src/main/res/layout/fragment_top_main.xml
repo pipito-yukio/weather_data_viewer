@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,6 +13,7 @@
         android:layout_margin="@dimen/frame_margin"
         android:layout_marginBottom="0dp"
         android:padding="@dimen/frame_padding"
+        android:layout_gravity="center_vertical"
         android:orientation="horizontal"
         android:background="@drawable/frame_background">
         <TextView
@@ -27,11 +27,9 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/frame_margin"
         android:layout_marginBottom="0dp"
-        android:padding="@dimen/frame_padding"
-        android:layout_weight="1"
         android:background="@drawable/frame_background">
 
         <TableRow android:gravity="center_vertical">
@@ -51,7 +49,7 @@
                 android:text="@string/lbl_temp_in"
                 style="@style/StyleDataLabel"/>
             <TextView
-                android:id="@+id/valTempin"
+                android:id="@+id/valTempIn"
                 style="@style/StyleDataValue"/>
             <TextView
                 android:text="@string/footer_lbl_temper_celsius"
@@ -81,15 +79,14 @@
                 android:text="@string/footer_lbl_pressure"
                 style="@style/StyleDataLabel"/>
         </TableRow>
-
-        <TableRow
-            android:id="@+id/messageRow"
-            android:visibility="gone">
-        </TableRow>
     </TableLayout>
 
+    <!-- 外気温日統計表示レイアウト -->
+
+    <include layout="@layout/frag_top_main_tempout_stat_container" />
+
     <TextView
-        android:id="@+id/tvWearningStatusView"
+        android:id="@+id/tvWarningStatusView"
         android:visibility="gone"
         style="@style/StyleResponseStatus"
         />

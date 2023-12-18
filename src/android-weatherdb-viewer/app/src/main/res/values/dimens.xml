@@ -9,14 +9,14 @@
     <dimen name="radioButtonScale">0.90</dimen>
 
     <!-- Fragment共通 -->
-    <dimen name="frame_margin">4dp</dimen>
-    <dimen name="frame_padding">4dp</dimen>
+    <dimen name="frame_margin">3dp</dimen>
+    <dimen name="frame_padding">3dp</dimen>
     <dimen name="bottom_controls_padding">3dp</dimen>
     <!-- AppTopFragment -->
     <dimen name="measurement_time_value_margin_left">5dp</dimen>
     <dimen name="data_value_margin">5dp</dimen>
     <dimen name="data_value_padding">5dp</dimen>
-    <dimen name="data_value_padding_right">8dp</dimen>
+    <dimen name="data_value_padding_end">16dp</dimen>
     <!-- Data行のラベル・単位 -->
     <dimen name="data_label_padding">3dp</dimen>
     <!-- Phoneの場合は上下同一値だが, Tabletでは幅が異なるので定義名は2つとする -->
@@ -45,10 +45,23 @@
 
     <!-- Text size -->
     <!-- AppTopFragment -->
-    <dimen name="measurement_label_text_size">28sp</dimen>
     <!-- 各端末で定義 -->
-    <dimen name="data_value_text_size">56sp</dimen>
-    <dimen name="measurement_value_text_size">28sp</dimen>
+    <dimen name="measurement_label_text_size">20sp</dimen>
+    <dimen name="measurement_value_text_size">24sp</dimen>
+    <dimen name="data_label_text_size">20sp</dimen>
+    <dimen name="data_value_text_size">36sp</dimen>
+    <!-- TempOut Statistics in ConstraintLayout -->
+    <dimen name="temp_out_stat_title_text_size">18sp</dimen>
+    <dimen name="temp_out_stat_label_text_size">18sp</dimen>
+    <dimen name="temp_out_stat_value_text_size">24sp</dimen>
+    <dimen name="temp_out_stat_top_margin">3dp</dimen>
+    <dimen name="temp_out_stat_start_margin">3dp</dimen>
+    <dimen name="temp_out_stat_end_margin">3dp</dimen>
+    <dimen name="temp_out_stat_temp_padding_end">10dp</dimen>
+    <dimen name="temp_out_stat_value_padding">2dp</dimen>
+    <dimen name="temp_out_stat_2nd_top_margin">10dp</dimen>
+    <dimen name="temp_out_stat_3rd_top_margin">16dp</dimen>
+    <dimen name="guid_line_temp_out_stat_begin">30dp</dimen>
     <!-- Phoneでは未使用だか他の端末用にここに定義が必要 ※Tabletのsw600dp, sw720dpで使用 -->
     <dimen name="button_label_text_size">16sp</dimen>
     <!-- 各端末で定義 -->

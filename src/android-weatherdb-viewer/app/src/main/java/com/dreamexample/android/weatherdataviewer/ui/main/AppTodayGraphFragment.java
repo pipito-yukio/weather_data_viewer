@@ -456,18 +456,7 @@ public class AppTodayGraphFragment extends AppBaseFragment {
             // N日前の画像ファイルが存在
             int beforeDayPos = sharedPref.getInt(
                     getString(R.string.pref_frag_today_selected_before_day), 0);
-            // 終了日
-            String startDay = sharedPref.getString(
-                    getString(R.string.pref_frag_today_start_day), null);
-            DEBUG_OUT.accept(TAG, "restoreBeforeDayWidgets.beforeDayPosition: " + beforeDayPos +
-                    ",startDay: " + startDay);
             mSpinnerBeforeDay.setSelection(beforeDayPos);
-            if (startDay != null) {
-                // 日付ピッカー用カレンダー更新
-                AppFragmentUtil.restoreCalendarObject(mMeasurementDayCal, startDay);
-                // 日付ピッカー起動ビュー更新
-                updateDateView(mInpStartDay, startDay);
-            }
         }
     }
 
@@ -494,9 +483,6 @@ public class AppTodayGraphFragment extends AppBaseFragment {
             // N日前の選択位置
             editor.putInt(getString(R.string.pref_frag_today_selected_before_day),
                     mSpinnerBeforeDay.getSelectedItemPosition());
-            // 終了日
-            editor.putString(getString(R.string.pref_frag_today_start_day),
-                    getStartDayInTextView());
         }
         // 保存の事実自体の保存 ※復元時にキーを削除
         editor.putString(mPrefKeyStopSaved, getString(R.string.pref_value_stop_saved));
@@ -633,7 +619,6 @@ public class AppTodayGraphFragment extends AppBaseFragment {
         String[] prefKeys = new String[] {
                 getString(R.string.pref_frag_today_radio_today_checked)/*本日ラジオボタン*/,
                 getString(R.string.pref_frag_today_selected_before_day)/*N日前選択値*/,
-                getString(R.string.pref_frag_today_start_day)/*終了日*/,
                 mPrefKeyStopSaved/*OnStop時保存キー*/
         };
         for (String key : prefKeys) {
